@@ -1,0 +1,15 @@
+{
+  "purpose": "constructed_teaching_examples_not_a_benchmark",
+  "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+  "criteria": {
+    "billing": "Payments, duplicate charges, invoices and refunds",
+    "technical": "Software errors, API failures and account access problems",
+    "delivery": "Missing parcels, damaged parcels and delivery tracking",
+    "needs_clarification": "Insufficient information to identify the relevant team"
+  },
+  "examples": [
+    {"id": "demo-001", "state": "I was charged twice for the same order. Please check the duplicate charge.", "intended_choice": "billing"},
+    {"id": "demo-002", "state": "The API returns an internal server error every time I make a request.", "intended_choice": "technical"},
+    {"id": "demo-003", "state": "Something went wrong. Can you help me?", "intended_choice": "needs_clarification"}
+  ]
+}

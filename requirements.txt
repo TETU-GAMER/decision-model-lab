@@ -1,0 +1,5 @@
+# First local CPU run: Windows x64, CPython 3.11; official PyTorch CPU wheel.
+transformers==4.57.6
+torch @ https://download.pytorch.org/whl/cpu/torch-2.6.0%2Bcpu-cp311-cp311-win_amd64.whl
+safetensors==0.6.2
+huggingface_hub==0.36.0

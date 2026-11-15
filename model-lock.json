@@ -1,0 +1,240 @@
+{
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "files": [
+    {
+      "path": "DISTRIBUTION_TERMS.md",
+      "size": 1256,
+      "sha256": "426dc9c6dc08687b872288ff91af690c806b01d105a94e2267a6f28c6768cdd7",
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSE",
+      "size": 11358,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/Transformers-Apache-2.0.txt",
+      "size": 11418,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/Upstream-MIT.txt",
+      "size": 1191,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/gemma/GEMMA_PROHIBITED_USE_POLICY.html",
+      "size": 4636,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/gemma/GEMMA_TERMS.html",
+      "size": 13510,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/gemma/Notice",
+      "size": 1088,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSES/gemma/TOKENIZER_TERMS.md",
+      "size": 1345,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "LICENSING_STATUS.md",
+      "size": 1535,
+      "sha256": "1332503fa069761da6c4a2b2149cb04a998452f9a208746daf73e1c05e477507",
+      "reviewed_source": false
+    },
+    {
+      "path": "NOTICE",
+      "size": 4359,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "NOTICE_SOURCES.json",
+      "size": 9255,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "README.md",
+      "size": 7579,
+      "sha256": "68c1e0ee22c6cb6dfdc0f800a5e55e1b3db01aeee4eaa27e61146c8485ba52b6",
+      "reviewed_source": false
+    },
+    {
+      "path": "TENSOR_SOURCES.json",
+      "size": 366550,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "TRAINING_ATTRIBUTION.md",
+      "size": 4633,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "config.json",
+      "size": 1089,
+      "sha256": "43357bfd40be87773266494f479530db88de7f4ff1c73132f01ff86bd325b870",
+      "reviewed_source": false
+    },
+    {
+      "path": "configuration_decision1.py",
+      "size": 3874,
+      "sha256": "9c2543721dd14485d2d1415b3f89de626d9c2a04eb5ad4e352809a1130d26df7",
+      "reviewed_source": true
+    },
+    {
+      "path": "decision1_qwen.py",
+      "size": 17015,
+      "sha256": "015fe2e874063e122a631de67cb3824148ffa1a76498ad6cf73971c6876e0d26",
+      "reviewed_source": true
+    },
+    {
+      "path": "decision1_rocm_conv.py",
+      "size": 3018,
+      "sha256": "24b442956c24dff8ff3ed5612ed84dc4d96426b9028fe6aaee437bbd41c2ea6e",
+      "reviewed_source": true
+    },
+    {
+      "path": "decision1_system_one.py",
+      "size": 9112,
+      "sha256": "cb5354d79af24deaf888625f755662f4dee6070229d9fe924ca5820801d5c7ff",
+      "reviewed_source": true
+    },
+    {
+      "path": "decision1_vela.py",
+      "size": 22516,
+      "sha256": "7f9c9dd8a73105fcee94ec1d9f334053694b33716f0a8a0a4007b57c78543898",
+      "reviewed_source": true
+    },
+    {
+      "path": "modeling_decision1.py",
+      "size": 13868,
+      "sha256": "c658d64fece379c5cf9632301f924282a933b00e11712a40a013d13d314a3f43",
+      "reviewed_source": true
+    },
+    {
+      "path": "native/choice_encoder.safetensors",
+      "size": 441337216,
+      "sha256": "bb520f1e36035862b3f9b564a24647e46704b8993d8d2f8659b3470252299792",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/decision_config.json",
+      "size": 13048,
+      "sha256": "f9b697bd57d0ae42041ca0a075f05c6d0123bd58adbd7e096ef25d0b55cf5d99",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/decision_heads.safetensors",
+      "size": 177241884,
+      "sha256": "730fa21bac15e7ba7e239658ef521aa74948dd7d0a9dc417c4aef7d36c084267",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/encoder/config.json",
+      "size": 2769,
+      "sha256": "7aff915e9f159305e0bef3eb0206416f99b8560260b8969b35f1dcd54aaad1a5",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/encoder/model.safetensors",
+      "size": 1227771752,
+      "sha256": "4c95e05a3abf24ec93ce209e22915c1e3f2199b4c9d9c76e88f27dee6a2123c3",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/score_encoder.safetensors",
+      "size": 441337080,
+      "sha256": "400d1d9cd29452b50250a96ab121df31ca40c5cfbabe94ebe634ab96aec79678",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/tokenizer/special_tokens_map.json",
+      "size": 1051,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "native/tokenizer/tokenizer.json",
+      "size": 34363188,
+      "sha256": "609d8f4c067cd3950f88594c5a802616cea245823836ef5848ee4fc40aab5b6f",
+      "reviewed_source": false
+    },
+    {
+      "path": "native/tokenizer/tokenizer_config.json",
+      "size": 46470,
+      "sha256": "74a259bb1a3811a7e3028adcd07a65765d866d5e66e0e883f0994ccfa67e8455",
+      "reviewed_source": false
+    },
+    {
+      "path": "pipeline_decision1.py",
+      "size": 2183,
+      "sha256": "d3ecd0dbbf6a5ab86ab8cf550bc829670b1b247ee3cfa337b2c9d78338e20feb",
+      "reviewed_source": true
+    },
+    {
+      "path": "source-metadata/ENCODER_README.md",
+      "size": 2046,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/ENCODER_SOURCE.json",
+      "size": 401,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/MMBERT_LICENSE_SOURCE_README.md",
+      "size": 29650,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/MMBERT_TOKENIZER_LINEAGE.yaml",
+      "size": 2768,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/MODEL_LICENSE_METADATA.json",
+      "size": 1514,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/TRANSFORMERS_LICENSE_SOURCE.json",
+      "size": 1178,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/TRANSFORMERS_MODERNBERT_SOURCE_HEADER.txt",
+      "size": 1497,
+      "sha256": null,
+      "reviewed_source": false
+    },
+    {
+      "path": "source-metadata/VELA_LICENSE_SOURCE_README.md",
+      "size": 2046,
+      "sha256": null,
+      "reviewed_source": false
+    }
+  ]
+}

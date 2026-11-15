@@ -1,0 +1,63 @@
+{
+  "created_at_utc": "2026-11-15T17:26:37.985536+00:00",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "requested_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "resolved_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "source_verification": "audit/download-verification.json",
+  "device_requested": "cpu",
+  "device_actual": "cpu",
+  "dtype_actual": "torch.float32",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "torch_cuda_build": null,
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "example_id": "demo-001",
+  "data_purpose": "constructed_teaching_examples_not_a_benchmark",
+  "request": {
+    "state": "I was charged twice for the same order. Please check the duplicate charge.",
+    "questions": {
+      "route": {
+        "type": "choice",
+        "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+        "criteria": {
+          "billing": "Payments, duplicate charges, invoices and refunds",
+          "technical": "Software errors, API failures and account access problems",
+          "delivery": "Missing parcels, damaged parcels and delivery tracking",
+          "needs_clarification": "Insufficient information to identify the relevant team"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "Decision-1.0-Kai-0.6B",
+    "answers": {
+      "route": {
+        "type": "choice",
+        "choice": "billing",
+        "confidence": 0.7149275690317154,
+        "probabilities": {
+          "billing": 0.8422572612762451,
+          "technical": 0.01825552247464657,
+          "delivery": 0.012157524935901165,
+          "needs_clarification": 0.12732969224452972
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 98,
+      "output_tokens": 0
+    }
+  },
+  "load_seconds": 4.674680899999657,
+  "inference_seconds": 0.2102749000005133,
+  "note": "Single teaching example, not a benchmark or a measured improvement.",
+  "export_note": "Exported from the original local run; machine-specific absolute paths removed. Request and complete model response preserved unchanged."
+}
