@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "ai_authored_exploratory_development_probe_not_a_benchmark",
+  "authorship": "AI-authored on 2026-11-17; not independently annotated or reviewed by the user.",
+  "labels": "No gold labels. Scenario tags describe coverage intentions only and are excluded from model requests.",
+  "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+  "criteria": {
+    "billing": "Payments, duplicate charges, invoices and refunds",
+    "technical": "Software errors, API failures and account access problems",
+    "delivery": "Missing parcels, damaged parcels and delivery tracking",
+    "needs_clarification": "Insufficient information to identify the relevant team"
+  },
+  "cases": [
+    {"id": "order-001", "scenario_tag": "billing_like", "state": "I need a VAT invoice for the subscription payment I made yesterday."},
+    {"id": "order-002", "scenario_tag": "billing_like", "state": "I cancelled my subscription last month, but another monthly fee appeared on my card today."},
+    {"id": "order-003", "scenario_tag": "billing_like", "state": "The approved refund has not appeared in my bank account after ten business days."},
+    {"id": "order-004", "scenario_tag": "technical_like", "state": "The Android app closes immediately whenever I open the settings screen."},
+    {"id": "order-005", "scenario_tag": "technical_like", "state": "Every password reset link says it has expired, even when I open it immediately."},
+    {"id": "order-006", "scenario_tag": "technical_like", "state": "My API requests return HTTP 401 even though I am using the new access token."},
+    {"id": "order-007", "scenario_tag": "delivery_like", "state": "Tracking says my package was delivered to reception, but reception has not received it."},
+    {"id": "order-008", "scenario_tag": "delivery_like", "state": "The parcel arrived soaking wet and the product inside was broken."},
+    {"id": "order-009", "scenario_tag": "delivery_like", "state": "My shipment has stayed at the same sorting centre for six days. Can someone locate it?"},
+    {"id": "order-010", "scenario_tag": "ambiguous_or_mixed", "state": "It failed again. Can somebody sort this out?"},
+    {"id": "order-011", "scenario_tag": "ambiguous_or_mixed", "state": "I need to change it before tomorrow. Please help."},
+    {"id": "order-012", "scenario_tag": "ambiguous_or_mixed", "state": "A charge I do not recognise appeared on my card, and I cannot sign in to inspect my account. Both issues need fixing."}
+  ]
+}

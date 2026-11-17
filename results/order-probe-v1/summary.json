@@ -1,0 +1,220 @@
+{
+  "case_count": 12,
+  "complete_cases": 12,
+  "cases_with_observed_choice_change": 7,
+  "stable_complete_cases": 5,
+  "planned_calls": 300,
+  "recorded_calls": 300,
+  "invalid_calls": 0,
+  "invalid_permutation_calls": 0,
+  "planned_noncanonical_comparisons": 276,
+  "valid_noncanonical_comparisons": 276,
+  "changed_noncanonical_choices": 47,
+  "changed_choice_fraction_of_valid_comparisons": 0.17028985507246377,
+  "repeat_valid_pairs": 12,
+  "repeat_choice_agreements": 12,
+  "max_repeat_tv": 0.0,
+  "max_order_tv": 0.43280124198645353,
+  "cases": [
+    {
+      "case_id": "order-001",
+      "scenario_tag": "billing_like",
+      "state": "I need a VAT invoice for the subscription payment I made yesterday.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "billing": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "billing",
+      "max_tv_from_canonical": 0.14816289953887463,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-002",
+      "scenario_tag": "billing_like",
+      "state": "I cancelled my subscription last month, but another monthly fee appeared on my card today.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "billing": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "billing",
+      "max_tv_from_canonical": 0.14806666783988476,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-003",
+      "scenario_tag": "billing_like",
+      "state": "The approved refund has not appeared in my bank account after ten business days.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "billing": 13,
+        "needs_clarification": 11
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "billing",
+      "max_tv_from_canonical": 0.25647301971912384,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-004",
+      "scenario_tag": "technical_like",
+      "state": "The Android app closes immediately whenever I open the settings screen.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.18721408024430275,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-005",
+      "scenario_tag": "technical_like",
+      "state": "Every password reset link says it has expired, even when I open it immediately.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 22,
+        "technical": 2
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.28289395570755005,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-006",
+      "scenario_tag": "technical_like",
+      "state": "My API requests return HTTP 401 even though I am using the new access token.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 15,
+        "technical": 9
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.21402332745492458,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-007",
+      "scenario_tag": "delivery_like",
+      "state": "Tracking says my package was delivered to reception, but reception has not received it.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "delivery": 23,
+        "needs_clarification": 1
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "delivery",
+      "max_tv_from_canonical": 0.28286355920135975,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-008",
+      "scenario_tag": "delivery_like",
+      "state": "The parcel arrived soaking wet and the product inside was broken.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "delivery": 21,
+        "needs_clarification": 3
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "delivery",
+      "max_tv_from_canonical": 0.1927093267440796,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-009",
+      "scenario_tag": "delivery_like",
+      "state": "My shipment has stayed at the same sorting centre for six days. Can someone locate it?",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 17,
+        "delivery": 7
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.43280124198645353,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-010",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "It failed again. Can somebody sort this out?",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.19652114249765873,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-011",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "I need to change it before tomorrow. Please help.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.3460934441536665,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "order-012",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "A charge I do not recognise appeared on my card, and I cannot sign in to inspect my account. Both issues need fixing.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "billing": 10,
+        "technical": 13,
+        "needs_clarification": 1
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "billing",
+      "max_tv_from_canonical": 0.3503303676843643,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    }
+  ]
+}

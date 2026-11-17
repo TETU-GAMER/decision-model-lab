@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-11-17T14:04:22.455014+00:00",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "data_file": "order_probe_v1.json",
+  "data_sha256": "e00660b14e099f49d738a97e17537d30c15bf9fc6e68b4d1cfabab2fe862d05c",
+  "data_purpose": "ai_authored_exploratory_development_probe_not_a_benchmark",
+  "authorship": "AI-authored on 2026-11-17; not independently annotated or reviewed by the user.",
+  "runner_sha256": "d8cd0ebc1d30644b0eab6ae7a7274d416559150ad1d776b5987b67cf1fae94be",
+  "loader_sha256": "429e9de7afe62acde99e8b4d9e549de7f7158493859af0814e1e1372d3854b38",
+  "candidate_ids": [
+    "billing",
+    "technical",
+    "delivery",
+    "needs_clarification"
+  ],
+  "case_count": 12,
+  "orders_per_case": 24,
+  "canonical_repeats_per_case": 1,
+  "planned_calls": 300,
+  "model_load_seconds": 3.848116300010588,
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "torch_threads": 14,
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "finished_at_utc": "2026-11-17T14:04:59.571270+00:00",
+  "experiment_seconds_excluding_load": 37.087413000001106
+}
