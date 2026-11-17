@@ -2,10 +2,13 @@
 import argparse
 import hashlib
 import json
+import platform
 import sys
 import time
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from importlib.metadata import version
 
 from evaluation import ReviewPending, load_reviewed_cases, score_predictions
 from review_cases import DEFAULT_LOCAL, DEFAULT_POLICY, DEFAULT_QUEUE, load_review_state, review_status, write_json
@@ -15,6 +18,37 @@ from run_example import MODEL_ID, ROOT, load_local_model
 from task_policy import fingerprint, policy_hash
 
 METHODS = ("rules", *STRATEGIES)
+
+
+def annotation_provenance(annotations):
+    reviews = annotations["reviews"]
+    return {"label_count": len(reviews),
+        "label_counts": dict(Counter(row["label"] for row in reviews)),
+        "assistance_counts": dict(Counter(row.get("assistance", "user_label_and_reason") for row in reviews)),
+        "ai_reasons_not_confirmed_by_user": sum(row.get("reason_confirmed_by_user") is False for row in reviews),
+        "note": "User-provided or user-confirmed labels, including AI-assisted decisions; not independent blind annotation."}
+
+
+def render_report(scores, metadata):
+    n = metadata["sample_count"]
+    provenance = metadata["annotation_provenance"]
+    lines = ["# 开发集分类对照 v1", "",
+        f"使用 {n} 条用户给出或确认标签的开发工单；任务规则为 `{metadata['policy_id']}`。",
+        "样例由 AI 构造，已经用于此前的探索实验，部分标签参考过 AI 解释，本报告不作为独立测试结果。", "",
+        "## 标注来源", "",
+        f"- 类别分布：{provenance['label_counts']}。",
+        f"- 辅助方式：{provenance['assistance_counts']}。",
+        f"- 其中 {provenance['ai_reasons_not_confirmed_by_user']} 条的理由由 AI 补充且未经用户单独确认，类别由用户明确给出。", "",
+        "## 实际结果", ""]
+    for method, score in scores.items():
+        lines.append(f"- {method}：匹配标签 {score['correct']}/{n}，准确率 {score['accuracy']:.2%}，Macro-F1={score['macro_f1']:.6f}，技术失败 {score['technical_failures']} 次。")
+    lines += ["", "## 统计口径", "",
+        "准确率保留全部样例作为分母。Macro-F1 对四个固定类别取平均，分母为零的项记 0。需要澄清是正常类别，技术失败或缺失预测单独计数。",
+        "规则和三种模型方法使用同一任务定义。标签及审核理由不进入模型请求，旧任务指令下的预测没有混入本次评分。",
+        "模型每条调用次数分别为 single=1、sorted=1、cyclic4=4；关键词规则不调用模型。记录中的耗时是本次观察，不作为受控速度基准。", "",
+        "## 文件", "",
+        "scores.json 保存完整分类指标及混淆矩阵；predictions.jsonl 保存每个方法的输出与原始模型子请求；metadata.json 保存模型、任务、数据和运行环境摘要。标注及审核理由另存于本机，不自动公开。", ""]
+    return "\n".join(lines)
 
 
 def evaluate_methods(predict, policy, cases, methods, on_record=None):
@@ -80,12 +114,20 @@ def main(argv=None):
     load_seconds = 0
     if any(method != "rules" for method in args.methods):
         model, lock, _, load_seconds = load_local_model("cpu")
+    environment = {"python": sys.version, "platform": platform.platform()}
+    if model is not None:
+        import torch
+        environment.update(device=str(next(model.parameters()).device),
+            dtype=str(next(model.parameters()).dtype), torch_threads=torch.get_num_threads(),
+            packages={name: version(name) for name in ("torch", "transformers", "safetensors", "huggingface_hub", "tokenizers")})
     metadata = {"created_at_utc": datetime.now(timezone.utc).isoformat(),
         "purpose": queue["purpose"], "policy_id": policy["policy_id"], "policy_sha256": policy_hash(policy),
         "queue_sha256": annotations["queue_sha256"], "annotations_sha256": fingerprint(annotations),
         "model_id": MODEL_ID if model is not None else None,
         "model_revision": lock["revision"] if lock else None, "model_load_seconds": load_seconds,
         "methods": args.methods, "sample_count": len(cases),
+        "annotation_provenance": annotation_provenance(annotations),
+        "environment": environment,
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "scorer_sha256": hashlib.sha256((ROOT / "evaluation.py").read_bytes()).hexdigest(),
         "rules_sha256": hashlib.sha256((ROOT / "rule_baseline.py").read_bytes()).hexdigest(),
@@ -100,6 +142,7 @@ def main(argv=None):
         records, scores = evaluate_methods(model.system_one if model is not None else None,
                                            policy, cases, args.methods, save_record)
     write_json(out / "scores.json", scores)
+    (out / "report.md").write_text(render_report(scores, metadata), encoding="utf-8")
     print(json.dumps({method: {key: result[key] for key in (
         "sample_count", "accuracy", "macro_f1", "technical_failure_rate")}
         for method, result in scores.items()}, indent=2))
