@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "source_commit": "b66e300",
+  "sample_count": 24,
+  "method_records": 96,
+  "model_calls": 144,
+  "annotation_provenance": {
+    "label_count": 24,
+    "label_counts": {
+      "billing": 6,
+      "technical": 6,
+      "delivery": 6,
+      "needs_clarification": 6
+    },
+    "assistance_counts": {
+      "user_label_and_reason": 9,
+      "ai_explanation_then_user_confirmation": 12,
+      "user_label_with_ai_generated_reason": 3
+    },
+    "ai_reasons_not_confirmed_by_user": 3,
+    "note": "User-provided or user-confirmed labels, including AI-assisted decisions; not independent blind annotation."
+  },
+  "methods": {
+    "rules": {
+      "correct": 24,
+      "prediction_counts": {
+        "billing": 6,
+        "technical": 6,
+        "delivery": 6,
+        "needs_clarification": 6
+      },
+      "model_calls": 0
+    },
+    "single": {
+      "correct": 6,
+      "prediction_counts": {
+        "needs_clarification": 24
+      },
+      "model_calls": 24
+    },
+    "sorted": {
+      "correct": 7,
+      "prediction_counts": {
+        "needs_clarification": 23,
+        "delivery": 1
+      },
+      "model_calls": 24
+    },
+    "cyclic4": {
+      "correct": 6,
+      "prediction_counts": {
+        "needs_clarification": 24
+      },
+      "model_calls": 96
+    }
+  },
+  "checks": [
+    "annotation and queue bindings",
+    "pre-run code and frozen rule baseline",
+    "all scores independently recomputed",
+    "all 144 raw model requests use the new policy and no labels"
+  ]
+}

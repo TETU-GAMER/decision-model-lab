@@ -1,0 +1,52 @@
+{
+  "created_at_utc": "2026-11-17T20:04:01.841870+00:00",
+  "purpose": "development_review_previously_probed_cases",
+  "policy_id": "ticket-routing-v1",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "queue_sha256": "f1361bac742fa441a305a61f7faa00b6c4e83b8b47357c084dfbf9ce34b9b14c",
+  "annotations_sha256": "93f68276018b99dddbbbcfdf7aa9b7b41f34c52c882869b7c6e89099d88b6e1d",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "model_load_seconds": 5.897877500014147,
+  "methods": [
+    "rules",
+    "single",
+    "sorted",
+    "cyclic4"
+  ],
+  "sample_count": 24,
+  "annotation_provenance": {
+    "label_count": 24,
+    "label_counts": {
+      "billing": 6,
+      "technical": 6,
+      "delivery": 6,
+      "needs_clarification": 6
+    },
+    "assistance_counts": {
+      "user_label_and_reason": 9,
+      "ai_explanation_then_user_confirmation": 12,
+      "user_label_with_ai_generated_reason": 3
+    },
+    "ai_reasons_not_confirmed_by_user": 3,
+    "note": "User-provided or user-confirmed labels, including AI-assisted decisions; not independent blind annotation."
+  },
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "torch_threads": 14,
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "runner_sha256": "09c1ec0833446f38a2abef4a1e2b253d226259481f5e554c925530df8c2637ae",
+  "scorer_sha256": "0dd5445856446c975d8c6cee922d86148269aa1846dd966281522f7d97d39131",
+  "rules_sha256": "704b3b4ba449b09e42e9f6fb861e577a7b2c93f08507da4c05b2e98639741836",
+  "note": "Reviewed development cases previously used in model exploration; not an independent test result."
+}
