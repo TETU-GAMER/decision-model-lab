@@ -2,7 +2,7 @@
 
 基于现成决策模型的工单路由学习实验：输入一条用户请求和候选部门，返回部门选择及候选概率。
 
-目前已完成单条教学推理，以及 12 条新探索工单的候选顺序实验，共保存 300 次实验调用。尚未训练、微调或开展有独立真值的正式评测。实验代码由 AI 辅助实现；使用者参与需求、技术取舍与结果分析，独立掌握程度另行记录。
+目前已完成本地工单路由、两批共 600 次候选顺序实验，以及四种路由策略的回放对照。尚未训练、微调或开展有独立真值的正式评测。实验代码由 AI 辅助实现；使用者参与需求、技术取舍与结果分析。
 
 ## 模型来源与版本
 
@@ -13,6 +13,30 @@
 - 本仓库提供独立实验入口，模型来自上游；上游模型代码和权重未修改。
 
 下载清单、大小和已固定的 SHA256 见 [model-lock.json](model-lock.json)。模型来源、许可范围和加载兼容处理见 [MODEL_PROVENANCE.md](MODEL_PROVENANCE.md)。
+
+## 路由入口与策略对照
+
+在完成下方的环境准备及模型下载后，可直接输入工单：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --strategy cyclic4 --text 'The approved refund has not appeared in my bank account after ten business days.'
+```
+
+支持原样调用 `single`、固定排序 `sorted`、四次轮换平均 `cyclic4`、全排列平均 `all24`，每条新工单分别需要 1、1、4、24 次模型调用。默认 `cyclic4`；执行前显示调用数，结果保留完整子请求。任一子调用失败就停止聚合，不返回部分平均结果。
+
+两批探索材料的回放对照中，四次轮换平均使发生改选的工单数从旧批次的 7/12 降到 1/12，新批次从 6/12 降到 2/12。固定排序只调用一次，两批均不随外部排列改选；这来自输入被固定。当前只比较顺序稳定性，尚不能判断谁更准确。
+
+[策略实现、完整对照结果与剩余问题](results/strategy-comparison-v1/README.md)记录了调用成本、仍会改选的工单，以及四次调用入口的实际输出。完整新批次原始响应也已保存。两批各有 300 次真实调用；策略比较复用这些响应，不把回放计算计作新增推理。
+
+离线检查与回放命令：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 -m unittest discover -s tests -v
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.compare_routing_strategies --run-dir results/order-probe-v1
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.compare_routing_strategies --run-dir results/order-probe-prospective-v1
+```
+
+16 项检查覆盖统计、概率聚合、异常处理和顺序不变性的边界。[本轮固定协议](experiments/STRATEGY_COMPARISON_V1.md)包含方法定义和复现步骤。
 
 ## 候选顺序敏感性实验 v1
 
@@ -90,4 +114,4 @@ python -m venv .venv
 
 ## 下一步
 
-先由使用者阅读并审核一条发生改选的工单，说明合理的部门及信息不足时的处理规则。然后审核更多样例、建立独立评测数据；再决定是否比较规则、普通 LLM 和决策模型，或研究缓解顺序影响的方法。是否微调以后再决定。
+先确定工单的路由规则并人工审核样例，建立独立评测数据；再比较不同策略的分类质量与调用成本。四次轮换后仍会改选的退款、网页空白、缺少包裹三条记录可作为第一批审核材料。是否微调以后再决定。

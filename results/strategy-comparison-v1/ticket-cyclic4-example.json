@@ -1,0 +1,225 @@
+{
+  "created_at_utc": "2026-11-17T14:24:45.410948+00:00",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "model_load_seconds": 3.490389199985657,
+  "routing_sha256": "d8f25d51050d3842774bd8b1254dfe4fc1dd9e9ce4561d4be19ecfdb7a6d232f",
+  "configuration_sha256": "ec93c8122f4ea0956bc176fd49d099ef98b6ff9f12f4b524c6a7eafea865c250",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0"
+    }
+  },
+  "result": {
+    "strategy": "cyclic4",
+    "model_calls": 4,
+    "successful_calls": 4,
+    "raw_calls": [
+      {
+        "index": 0,
+        "candidate_order": [
+          "billing",
+          "technical",
+          "delivery",
+          "needs_clarification"
+        ],
+        "request": {
+          "state": "The approved refund has not appeared in my bank account after ten business days.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+              "criteria": {
+                "billing": "Payments, duplicate charges, invoices and refunds",
+                "technical": "Software errors, API failures and account access problems",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking",
+                "needs_clarification": "Insufficient information to identify the relevant team"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "billing",
+              "confidence": 0.1686531901359558,
+              "probabilities": {
+                "billing": 0.5381615161895752,
+                "technical": 0.0519733764231205,
+                "delivery": 0.0403568372130394,
+                "needs_clarification": 0.3695083260536194
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 98,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.18609589998959564
+      },
+      {
+        "index": 1,
+        "candidate_order": [
+          "technical",
+          "delivery",
+          "needs_clarification",
+          "billing"
+        ],
+        "request": {
+          "state": "The approved refund has not appeared in my bank account after ten business days.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+              "criteria": {
+                "technical": "Software errors, API failures and account access problems",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking",
+                "needs_clarification": "Insufficient information to identify the relevant team",
+                "billing": "Payments, duplicate charges, invoices and refunds"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "needs_clarification",
+              "confidence": 0.1402606964111328,
+              "probabilities": {
+                "technical": 0.15283983945846558,
+                "delivery": 0.04437538981437683,
+                "needs_clarification": 0.471522718667984,
+                "billing": 0.3312620222568512
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 98,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.18621329998131841
+      },
+      {
+        "index": 2,
+        "candidate_order": [
+          "delivery",
+          "needs_clarification",
+          "billing",
+          "technical"
+        ],
+        "request": {
+          "state": "The approved refund has not appeared in my bank account after ten business days.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+              "criteria": {
+                "delivery": "Missing parcels, damaged parcels and delivery tracking",
+                "needs_clarification": "Insufficient information to identify the relevant team",
+                "billing": "Payments, duplicate charges, invoices and refunds",
+                "technical": "Software errors, API failures and account access problems"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "billing",
+              "confidence": 0.03274616599082947,
+              "probabilities": {
+                "delivery": 0.07326210290193558,
+                "needs_clarification": 0.3831416070461273,
+                "billing": 0.4158877730369568,
+                "technical": 0.12770850956439972
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 98,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.20840910001425073
+      },
+      {
+        "index": 3,
+        "candidate_order": [
+          "needs_clarification",
+          "billing",
+          "technical",
+          "delivery"
+        ],
+        "request": {
+          "state": "The approved refund has not appeared in my bank account after ten business days.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+              "criteria": {
+                "needs_clarification": "Insufficient information to identify the relevant team",
+                "billing": "Payments, duplicate charges, invoices and refunds",
+                "technical": "Software errors, API failures and account access problems",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "billing",
+              "confidence": 0.17140311002731323,
+              "probabilities": {
+                "needs_clarification": 0.3305891752243042,
+                "billing": 0.5019922852516174,
+                "technical": 0.1038810983300209,
+                "delivery": 0.06353746354579926
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 98,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.21939119999296963
+      }
+    ],
+    "probability_note": "Uncalibrated mean model probabilities, not measured correctness.",
+    "status": "ok",
+    "choice": "billing",
+    "probabilities": {
+      "billing": 0.44682589918375015,
+      "delivery": 0.055382948368787766,
+      "needs_clarification": 0.38869045674800873,
+      "technical": 0.10910070594400167
+    },
+    "top_two_margin": 0.058135442435741425,
+    "vote_counts": {
+      "billing": 3,
+      "needs_clarification": 1
+    }
+  }
+}

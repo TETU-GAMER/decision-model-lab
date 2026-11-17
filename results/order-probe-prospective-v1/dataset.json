@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "ai_authored_exploratory_development_probe_not_a_benchmark",
+  "authorship": "AI-authored on 2026-11-17 and fixed before running the strategy comparison on this batch; not independently annotated or reviewed by the user.",
+  "labels": "No gold labels. Scenario tags are coverage intentions only, never model inputs. This is a fresh exploratory batch, not an independently labelled test set.",
+  "instructions": "Which team should handle this request? If the request does not provide enough information to choose a team, select needs_clarification.",
+  "criteria": {
+    "billing": "Payments, duplicate charges, invoices and refunds",
+    "technical": "Software errors, API failures and account access problems",
+    "delivery": "Missing parcels, damaged parcels and delivery tracking",
+    "needs_clarification": "Insufficient information to identify the relevant team"
+  },
+  "cases": [
+    {"id": "fresh-001", "scenario_tag": "billing_like", "state": "The receipt lists the wrong company name and tax number. Please issue a corrected invoice."},
+    {"id": "fresh-002", "scenario_tag": "billing_like", "state": "My annual renewal was advertised at 80 dollars, but the renewal payment was 120 dollars."},
+    {"id": "fresh-003", "scenario_tag": "billing_like", "state": "The payment page said the transaction was declined, yet there is a pending charge on my bank statement."},
+    {"id": "fresh-004", "scenario_tag": "technical_like", "state": "After signing in, the web dashboard stays blank in both browsers. Clearing the cache did not help."},
+    {"id": "fresh-005", "scenario_tag": "technical_like", "state": "File uploads always stop at 67 percent and display an unexpected error."},
+    {"id": "fresh-006", "scenario_tag": "technical_like", "state": "The account rejects every two-factor authentication code although my phone clock is correct."},
+    {"id": "fresh-007", "scenario_tag": "delivery_like", "state": "The courier took my parcel to a different building. The delivery photo is not my doorway."},
+    {"id": "fresh-008", "scenario_tag": "delivery_like", "state": "There has been no tracking update for two weeks and the expected arrival date has passed."},
+    {"id": "fresh-009", "scenario_tag": "delivery_like", "state": "Only one of the three boxes in this shipment arrived. Where are the other two boxes?"},
+    {"id": "fresh-010", "scenario_tag": "ambiguous_or_mixed", "state": "Can you update my details? They are no longer correct."},
+    {"id": "fresh-011", "scenario_tag": "ambiguous_or_mixed", "state": "I cannot complete this order and do not know what is wrong."},
+    {"id": "fresh-012", "scenario_tag": "ambiguous_or_mixed", "state": "My parcel was damaged in transit and my card shows two charges. Please address both problems."}
+  ]
+}

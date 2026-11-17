@@ -1,0 +1,44 @@
+{
+  "case_count": 12,
+  "source_calls": 300,
+  "incoming_orders_per_case": 24,
+  "noncanonical_comparisons": 276,
+  "strategy_variants": 288,
+  "source_repeat_choice_agreements": 12,
+  "source_repeat_max_tv": 0.0,
+  "comparison_type": "Replay of saved responses; no new model calls or end-to-end latency measurements.",
+  "strategies": {
+    "single": {
+      "model_calls_per_new_ticket": 1,
+      "cases_with_choice_change": 7,
+      "changed_noncanonical_choices": 47,
+      "max_tv_from_canonical": 0.43280124198645353,
+      "agreements_with_full24_mean": 244,
+      "max_tv_to_full24_mean": 0.36515665946838755
+    },
+    "sorted": {
+      "model_calls_per_new_ticket": 1,
+      "cases_with_choice_change": 0,
+      "changed_noncanonical_choices": 0,
+      "max_tv_from_canonical": 0.0,
+      "agreements_with_full24_mean": 264,
+      "max_tv_to_full24_mean": 0.1320332343069216
+    },
+    "cyclic4": {
+      "model_calls_per_new_ticket": 4,
+      "cases_with_choice_change": 1,
+      "changed_noncanonical_choices": 8,
+      "max_tv_from_canonical": 0.11986303306184709,
+      "agreements_with_full24_mean": 280,
+      "max_tv_to_full24_mean": 0.09142888539160293
+    },
+    "all24": {
+      "model_calls_per_new_ticket": 24,
+      "cases_with_choice_change": 0,
+      "changed_noncanonical_choices": 0,
+      "max_tv_from_canonical": 0.0,
+      "agreements_with_full24_mean": 288,
+      "max_tv_to_full24_mean": 0.0
+    }
+  }
+}

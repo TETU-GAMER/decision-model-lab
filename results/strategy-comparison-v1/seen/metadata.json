@@ -1,0 +1,12 @@
+{
+  "created_at_utc": "2026-11-17T14:24:36.039711+00:00",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "source_data_sha256": "e00660b14e099f49d738a97e17537d30c15bf9fc6e68b4d1cfabab2fe862d05c",
+  "source_metadata_sha256": "c2ed2bfd9720344de24502e893549ad6554c16f48c6c13de2f4c4f6476c2a9a6",
+  "source_requests_sha256": "22bb131bc22487c14534342d0b9f84d20e218d9c2c06ba265b1908ad2856c8e7",
+  "routing_sha256": "d8f25d51050d3842774bd8b1254dfe4fc1dd9e9ce4561d4be19ecfdb7a6d232f",
+  "analyzer_sha256": "b25713ea57839c497aed408fa58da83b2b68e21472989510860be1492fe14d1f",
+  "source_call_count": 300,
+  "new_model_calls_for_replay": 0
+}

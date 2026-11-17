@@ -1,0 +1,218 @@
+{
+  "case_count": 12,
+  "complete_cases": 12,
+  "cases_with_observed_choice_change": 6,
+  "stable_complete_cases": 6,
+  "planned_calls": 300,
+  "recorded_calls": 300,
+  "invalid_calls": 0,
+  "invalid_permutation_calls": 0,
+  "planned_noncanonical_comparisons": 276,
+  "valid_noncanonical_comparisons": 276,
+  "changed_noncanonical_choices": 38,
+  "changed_choice_fraction_of_valid_comparisons": 0.13768115942028986,
+  "repeat_valid_pairs": 12,
+  "repeat_choice_agreements": 12,
+  "max_repeat_tv": 0.0,
+  "max_order_tv": 0.6168810445815325,
+  "cases": [
+    {
+      "case_id": "fresh-001",
+      "scenario_tag": "billing_like",
+      "state": "The receipt lists the wrong company name and tax number. Please issue a corrected invoice.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.16257486958056688,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-002",
+      "scenario_tag": "billing_like",
+      "state": "My annual renewal was advertised at 80 dollars, but the renewal payment was 120 dollars.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 20,
+        "billing": 4
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.17893684282898903,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-003",
+      "scenario_tag": "billing_like",
+      "state": "The payment page said the transaction was declined, yet there is a pending charge on my bank statement.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "billing": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "billing",
+      "max_tv_from_canonical": 0.1679494846612215,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-004",
+      "scenario_tag": "technical_like",
+      "state": "After signing in, the web dashboard stays blank in both browsers. Clearing the cache did not help.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 17,
+        "technical": 7
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.6168810445815325,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-005",
+      "scenario_tag": "technical_like",
+      "state": "File uploads always stop at 67 percent and display an unexpected error.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 17,
+        "technical": 7
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.37824549712240696,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-006",
+      "scenario_tag": "technical_like",
+      "state": "The account rejects every two-factor authentication code although my phone clock is correct.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "technical": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "technical",
+      "max_tv_from_canonical": 0.156339256092906,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-007",
+      "scenario_tag": "delivery_like",
+      "state": "The courier took my parcel to a different building. The delivery photo is not my doorway.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "delivery": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "delivery",
+      "max_tv_from_canonical": 0.18362491391599178,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-008",
+      "scenario_tag": "delivery_like",
+      "state": "There has been no tracking update for two weeks and the expected arrival date has passed.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 18,
+        "delivery": 6
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.20809675194323063,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-009",
+      "scenario_tag": "delivery_like",
+      "state": "Only one of the three boxes in this shipment arrived. Where are the other two boxes?",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 11,
+        "delivery": 13
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.41721006762236357,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-010",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "Can you update my details? They are no longer correct.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.21844151243567467,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-011",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "I cannot complete this order and do not know what is wrong.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "needs_clarification": 24
+      },
+      "observed_choice_change": false,
+      "stable_across_all_orders": true,
+      "canonical_choice": "needs_clarification",
+      "max_tv_from_canonical": 0.2556813806295395,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    },
+    {
+      "case_id": "fresh-012",
+      "scenario_tag": "ambiguous_or_mixed",
+      "state": "My parcel was damaged in transit and my card shows two charges. Please address both problems.",
+      "complete": true,
+      "valid_permutations": 24,
+      "choice_counts": {
+        "delivery": 23,
+        "needs_clarification": 1
+      },
+      "observed_choice_change": true,
+      "stable_across_all_orders": false,
+      "canonical_choice": "delivery",
+      "max_tv_from_canonical": 0.33803082816302776,
+      "repeat_same_choice": true,
+      "repeat_tv": 0.0
+    }
+  ]
+}
