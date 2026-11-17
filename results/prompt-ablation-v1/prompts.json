@@ -1,0 +1,29 @@
+{
+  "original": {
+    "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+    "criteria": {
+      "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+      "technical": "Software errors, API failures and account access problems when these are the primary request",
+      "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+      "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request"
+    }
+  },
+  "instruction_only": {
+    "instructions": "Choose the team that best matches the customer's main issue. If the customer says which issue to handle first, use that issue. Choose needs_clarification only if the request is too vague to identify a team or gives equal priority to issues for different teams.",
+    "criteria": {
+      "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+      "technical": "Software errors, API failures and account access problems when these are the primary request",
+      "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+      "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request"
+    }
+  },
+  "clarification_description_only": {
+    "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+    "criteria": {
+      "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+      "technical": "Software errors, API failures and account access problems when these are the primary request",
+      "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+      "needs_clarification": "Ask a follow-up question only when the message is too vague to pick a team, or when issues for different teams are equally important."
+    }
+  }
+}

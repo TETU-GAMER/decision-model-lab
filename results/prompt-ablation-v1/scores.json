@@ -1,0 +1,260 @@
+{
+  "original": {
+    "sample_count": 24,
+    "correct": 6,
+    "accuracy": 0.25,
+    "macro_f1": 0.1,
+    "technical_failures": 0,
+    "missing_predictions": 0,
+    "technical_failure_rate": 0.0,
+    "per_class": {
+      "billing": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "technical": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "delivery": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "needs_clarification": {
+        "support": 6,
+        "tp": 6,
+        "fp": 18,
+        "fn": 0,
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      }
+    },
+    "confusion_matrix": {
+      "billing": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "technical": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "delivery": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "needs_clarification": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      }
+    },
+    "metric_note": "All reviewed cases remain in denominators. Macro-F1 uses all four fixed labels; zero divisions are zero. needs_clarification is a class, not a technical failure.",
+    "prediction_counts": {
+      "needs_clarification": 24
+    },
+    "predicted_clarification": 24,
+    "incorrect_clarifications": 18,
+    "correct_clarifications": 6,
+    "clarification_support": 6
+  },
+  "instruction_only": {
+    "sample_count": 24,
+    "correct": 8,
+    "accuracy": 0.3333333333333333,
+    "macro_f1": 0.2786935286935287,
+    "technical_failures": 0,
+    "missing_predictions": 0,
+    "technical_failure_rate": 0.0,
+    "per_class": {
+      "billing": {
+        "support": 6,
+        "tp": 1,
+        "fp": 0,
+        "fn": 5,
+        "precision": 1.0,
+        "recall": 0.16666666666666666,
+        "f1": 0.2857142857142857
+      },
+      "technical": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "delivery": {
+        "support": 6,
+        "tp": 2,
+        "fp": 1,
+        "fn": 4,
+        "precision": 0.6666666666666666,
+        "recall": 0.3333333333333333,
+        "f1": 0.4444444444444444
+      },
+      "needs_clarification": {
+        "support": 6,
+        "tp": 5,
+        "fp": 15,
+        "fn": 1,
+        "precision": 0.25,
+        "recall": 0.8333333333333334,
+        "f1": 0.38461538461538464
+      }
+    },
+    "confusion_matrix": {
+      "billing": {
+        "billing": 1,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 5,
+        "__failure__": 0
+      },
+      "technical": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "delivery": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 2,
+        "needs_clarification": 4,
+        "__failure__": 0
+      },
+      "needs_clarification": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 1,
+        "needs_clarification": 5,
+        "__failure__": 0
+      }
+    },
+    "metric_note": "All reviewed cases remain in denominators. Macro-F1 uses all four fixed labels; zero divisions are zero. needs_clarification is a class, not a technical failure.",
+    "prediction_counts": {
+      "needs_clarification": 20,
+      "billing": 1,
+      "delivery": 3
+    },
+    "predicted_clarification": 20,
+    "incorrect_clarifications": 15,
+    "correct_clarifications": 5,
+    "clarification_support": 6
+  },
+  "clarification_description_only": {
+    "sample_count": 24,
+    "correct": 9,
+    "accuracy": 0.375,
+    "macro_f1": 0.28181818181818186,
+    "technical_failures": 0,
+    "missing_predictions": 0,
+    "technical_failure_rate": 0.0,
+    "per_class": {
+      "billing": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "technical": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "delivery": {
+        "support": 6,
+        "tp": 4,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.8,
+        "recall": 0.6666666666666666,
+        "f1": 0.7272727272727273
+      },
+      "needs_clarification": {
+        "support": 6,
+        "tp": 5,
+        "fp": 14,
+        "fn": 1,
+        "precision": 0.2631578947368421,
+        "recall": 0.8333333333333334,
+        "f1": 0.4
+      }
+    },
+    "confusion_matrix": {
+      "billing": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "technical": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 0,
+        "needs_clarification": 6,
+        "__failure__": 0
+      },
+      "delivery": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 4,
+        "needs_clarification": 2,
+        "__failure__": 0
+      },
+      "needs_clarification": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 1,
+        "needs_clarification": 5,
+        "__failure__": 0
+      }
+    },
+    "metric_note": "All reviewed cases remain in denominators. Macro-F1 uses all four fixed labels; zero divisions are zero. needs_clarification is a class, not a technical failure.",
+    "prediction_counts": {
+      "needs_clarification": 19,
+      "delivery": 5
+    },
+    "predicted_clarification": 19,
+    "incorrect_clarifications": 14,
+    "correct_clarifications": 5,
+    "clarification_support": 6
+  }
+}
