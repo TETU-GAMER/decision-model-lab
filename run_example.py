@@ -40,6 +40,44 @@ def read_examples(path):
     return data
 
 
+def load_local_model(device="cpu"):
+    """Shared, offline loader; verify the pinned release before executing code."""
+    lock = json.loads((ROOT / "model-lock.json").read_text(encoding="utf-8-sig"))
+    model_path = ROOT / "models" / lock["revision"]
+    if not (ROOT / "audit" / "download-verification.json").exists():
+        raise RuntimeError("Run download_model.py first to download and verify the pinned release")
+    verification = json.loads((ROOT / "audit/download-verification.json").read_text(encoding="utf-8"))
+    if verification["revision"] != lock["revision"] or verification["model_id"] != lock["model_id"]:
+        raise RuntimeError("Download verification belongs to a different model release")
+    for entry in lock["files"]:
+        path = model_path / entry["path"]
+        if not path.is_file() or path.stat().st_size != entry["size"]:
+            raise RuntimeError(f"Missing or changed model file: {entry['path']}")
+        if entry["reviewed_source"]:
+            if hashlib.sha256(path.read_bytes()).hexdigest() != entry["sha256"]:
+                raise RuntimeError(f"Custom code differs from the reviewed version: {entry['path']}")
+    os.environ["HF_HOME"] = str(ROOT / ".cache" / "huggingface")
+    os.environ["HF_HUB_OFFLINE"] = "1"
+    os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    from transformers import AutoModel
+    from transformers.dynamic_module_utils import get_cached_module_file
+
+    # Transformers 4.57.6 copies only immediate imports for a local model.
+    # Stage every hash-checked source so its recursive dependency scan also
+    # finds the indirect ROCm helper. Upstream source files stay unchanged.
+    for entry in lock["files"]:
+        if entry["reviewed_source"]:
+            get_cached_module_file(str(model_path), entry["path"], local_files_only=True)
+
+    print(f"Loading verified local model on {device}...", flush=True)
+    started = time.perf_counter()
+    model = AutoModel.from_pretrained(
+        str(model_path), trust_remote_code=True, device=device, local_files_only=True
+    )
+    load_seconds = time.perf_counter() - started
+    return model, lock, model_path, load_seconds
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--validate-only", action="store_true")
@@ -54,37 +92,9 @@ def main():
         print(f"Validated {len(data['examples'])} teaching examples; no model call or network access.")
         return
 
-    lock = json.loads((ROOT / "model-lock.json").read_text(encoding="utf-8-sig"))
-    model_path = ROOT / "models" / lock["revision"]
-    if not (ROOT / "audit" / "download-verification.json").exists():
-        parser.error("Run download_model.py first to download and verify the pinned release")
-    for entry in lock["files"]:
-        path = model_path / entry["path"]
-        if not path.is_file() or path.stat().st_size != entry["size"]:
-            parser.error(f"Missing or changed model file: {entry['path']}")
-        if entry["reviewed_source"]:
-            if hashlib.sha256(path.read_bytes()).hexdigest() != entry["sha256"]:
-                parser.error(f"Custom code differs from the reviewed version: {entry['path']}")
-    os.environ["HF_HOME"] = str(ROOT / ".cache" / "huggingface")
-    os.environ["HF_HUB_OFFLINE"] = "1"
-    os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+    model, lock, model_path, load_seconds = load_local_model(args.device)
     import torch
-    from transformers import AutoModel
-    from transformers.dynamic_module_utils import get_cached_module_file
 
-    # Transformers 4.57.6 copies only immediate imports for a local model.
-    # Stage every hash-checked source so its recursive dependency scan also
-    # finds the indirect ROCm helper. Upstream source files stay unchanged.
-    for entry in lock["files"]:
-        if entry["reviewed_source"]:
-            get_cached_module_file(str(model_path), entry["path"], local_files_only=True)
-
-    print(f"Loading verified local model on {args.device}...", flush=True)
-    started = time.perf_counter()
-    model = AutoModel.from_pretrained(
-        str(model_path), trust_remote_code=True, device=args.device, local_files_only=True
-    )
-    load_seconds = time.perf_counter() - started
     # The intended answer is deliberately excluded from the model request.
     request = {
         "state": example["state"],
