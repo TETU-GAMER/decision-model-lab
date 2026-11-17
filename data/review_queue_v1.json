@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "purpose": "development_review_previously_probed_cases",
+  "policy_id": "ticket-routing-v1",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "source_files": [
+    {
+      "file": "order_probe_v1.json",
+      "sha256": "e00660b14e099f49d738a97e17537d30c15bf9fc6e68b4d1cfabab2fe862d05c"
+    },
+    {
+      "file": "order_probe_prospective_v1.json",
+      "sha256": "638ecae91b2a0cd35b619206bb529eda2816f67013105f8bc84ee29bf521a9f6"
+    }
+  ],
+  "note": "Previously probed AI-authored cases, not an independent test set. No model predictions or scenario tags are shown. Chinese text is an AI reading aid.",
+  "items": [
+    {
+      "id": "order-003",
+      "state": "The approved refund has not appeared in my bank account after ten business days.",
+      "state_sha256": "d1c7aea30c799da9b0851b6b89fb4ab0fc5ee1ff3a5a8d9b4f14a2793994fcd1",
+      "reading_aid_zh": "已获批准的退款，十个工作日后仍未到我的银行账户。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-004",
+      "state": "After signing in, the web dashboard stays blank in both browsers. Clearing the cache did not help.",
+      "state_sha256": "be10cff1201809443e6c620ec19300b288074825c3ffff1664ddc365344134c0",
+      "reading_aid_zh": "登录后，网页仪表盘在两个浏览器中都一直空白，清除缓存也无效。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-009",
+      "state": "Only one of the three boxes in this shipment arrived. Where are the other two boxes?",
+      "state_sha256": "c071781b930fe18799ed8795e4448381931ab9bb325a38f3835e9fb34fd847da",
+      "reading_aid_zh": "这批货共三箱，但我只收到一箱，另外两箱在哪里？",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-001",
+      "state": "I need a VAT invoice for the subscription payment I made yesterday.",
+      "state_sha256": "099f02ac25333e1f00ff5f18612d7418912e9e46f8d93bb152f081455cbb50ca",
+      "reading_aid_zh": "我需要昨天订阅付款的增值税发票。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-002",
+      "state": "I cancelled my subscription last month, but another monthly fee appeared on my card today.",
+      "state_sha256": "25544133cb2cdac36b1e5eb35ff790ed28c5bcd94837971a79739ce4c73210d1",
+      "reading_aid_zh": "上个月已取消订阅，但今天银行卡又被收了一笔月费。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-004",
+      "state": "The Android app closes immediately whenever I open the settings screen.",
+      "state_sha256": "68e64723b2bb42dcf3d32b162db6478adb2c23c34c2884d69bad08319e8f0731",
+      "reading_aid_zh": "每次打开设置页面，安卓应用都会立刻关闭。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-005",
+      "state": "Every password reset link says it has expired, even when I open it immediately.",
+      "state_sha256": "a6a451eb4bece76df8bd58831d16c1ba0ea35ef825d61f9d7480b4b73cb57c91",
+      "reading_aid_zh": "每条密码重置链接都提示过期，即使我收到后马上打开。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-006",
+      "state": "My API requests return HTTP 401 even though I am using the new access token.",
+      "state_sha256": "f9573b72d7edc27a5f4e9ec620dc199f65a0553d60eb495c910aa4905b4313be",
+      "reading_aid_zh": "虽然使用了新访问令牌，API 请求仍返回 HTTP 401。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-007",
+      "state": "Tracking says my package was delivered to reception, but reception has not received it.",
+      "state_sha256": "749bf8598e964a9e4ccb571daa5337059d28a4c1f35307a6ccc78fea010e3737",
+      "reading_aid_zh": "物流显示包裹已交给前台，但前台没有收到。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-008",
+      "state": "The parcel arrived soaking wet and the product inside was broken.",
+      "state_sha256": "6c89db84dc9cb21b1055ff4aca2396ac3d25e0c05b87402a3a1e335c3aeef1cd",
+      "reading_aid_zh": "包裹送到时已经湿透，里面的商品也坏了。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-009",
+      "state": "My shipment has stayed at the same sorting centre for six days. Can someone locate it?",
+      "state_sha256": "b6f5c58dfcc670f610a4e3e70f50ea427641e185cfc557916fc67f07798e329b",
+      "reading_aid_zh": "货物在同一个分拣中心停了六天，能帮忙查找吗？",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-010",
+      "state": "It failed again. Can somebody sort this out?",
+      "state_sha256": "bc60157613d80cbfdacb6a3c32c0a85714b95b0c4c177d8c0f38f3809fb44574",
+      "reading_aid_zh": "又失败了，有人能帮忙处理吗？",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-011",
+      "state": "I need to change it before tomorrow. Please help.",
+      "state_sha256": "9b460da6dee853f59be5dd8bae0c2b2125b55c2f891375f9a97bb6caf99c2a6f",
+      "reading_aid_zh": "我需要在明天之前修改它，请帮忙。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "order-012",
+      "state": "A charge I do not recognise appeared on my card, and I cannot sign in to inspect my account. Both issues need fixing.",
+      "state_sha256": "a057a57c15579af30299859571c6a56f4fbb80e9f1ffd294ba2c180b28ff38d8",
+      "reading_aid_zh": "银行卡出现一笔不认识的扣款，而且我无法登录账号查看。这两个问题都需要解决。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-001",
+      "state": "The receipt lists the wrong company name and tax number. Please issue a corrected invoice.",
+      "state_sha256": "12bb374c8b04c7d9cbb0cec7ecb004e0c64927c77124618614415c13b4f4e8ac",
+      "reading_aid_zh": "收据上的公司名称和税号不正确，请重新开一张正确的发票。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-002",
+      "state": "My annual renewal was advertised at 80 dollars, but the renewal payment was 120 dollars.",
+      "state_sha256": "008e077314390f75f61a6c338e600558ea5335ae4e67b53472e91bf739137ba9",
+      "reading_aid_zh": "年度续费宣传价是 80 美元，但实际续费收了 120 美元。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-003",
+      "state": "The payment page said the transaction was declined, yet there is a pending charge on my bank statement.",
+      "state_sha256": "38efb1cfb5dbbd25a8870a6ee5e5179ac9041b0c72b81f2a293f102b9ba8047f",
+      "reading_aid_zh": "付款页面显示交易被拒绝，但银行账单上出现了一笔待处理扣款。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-005",
+      "state": "File uploads always stop at 67 percent and display an unexpected error.",
+      "state_sha256": "645f74ee97f1ebb854464ca58049e748c7e6df218bcce7886fc5136417e7a9ec",
+      "reading_aid_zh": "文件上传总是在 67% 停止，并显示意外错误。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-006",
+      "state": "The account rejects every two-factor authentication code although my phone clock is correct.",
+      "state_sha256": "adc9067a969d408c9b9aede925f5e30f056066a4bc1a29b21732c69483ac9bf3",
+      "reading_aid_zh": "手机时间正确，但账号仍拒绝所有双重验证代码。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-007",
+      "state": "The courier took my parcel to a different building. The delivery photo is not my doorway.",
+      "state_sha256": "57d1f4822dd4a79d4c6c497630706858b18af57be9e9ac25f1f9c47e6dc43af3",
+      "reading_aid_zh": "快递员把包裹送到了另一栋楼，投递照片不是我家门口。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-008",
+      "state": "There has been no tracking update for two weeks and the expected arrival date has passed.",
+      "state_sha256": "f91a892d3c29af4975938b77adbbbbbc4185928f68d334c18bcfb331524c0543",
+      "reading_aid_zh": "物流两周没有更新，预计到达日期也已过去。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-010",
+      "state": "Can you update my details? They are no longer correct.",
+      "state_sha256": "23fb261e1c49eaae768fca92f9a7906ec7f9ad865fdd3ae28ea19be21c84d795",
+      "reading_aid_zh": "能帮我更新一下个人信息吗？现在的信息已经不对了。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-011",
+      "state": "I cannot complete this order and do not know what is wrong.",
+      "state_sha256": "a4cbcf4b084e2d372d6be95dd278ddd0c00cc31e1e10221b12442da610a8152d",
+      "reading_aid_zh": "我无法完成这个订单，也不知道哪里出了问题。",
+      "label": null,
+      "reason": null
+    },
+    {
+      "id": "fresh-012",
+      "state": "My parcel was damaged in transit and my card shows two charges. Please address both problems.",
+      "state_sha256": "b5cb9cab44820414f542e00752e7223e3ad21e6a4ddfcbdb252b286942fce82b",
+      "reading_aid_zh": "包裹在运输途中损坏了，银行卡上还出现了两笔扣款。这两个问题都请处理。",
+      "label": null,
+      "reason": null
+    }
+  ]
+}
