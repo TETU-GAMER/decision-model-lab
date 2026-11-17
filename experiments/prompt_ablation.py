@@ -1,4 +1,4 @@
-"""Compare two isolated prompt edits on the reviewed routing development set."""
+"""Compare original, isolated, and combined prompts on the reviewed development set."""
 
 import argparse
 import hashlib
@@ -31,12 +31,12 @@ CLARIFY_DESCRIPTION = (
 
 
 def variants(policy):
+    revised_criteria = {**policy["criteria"], CLARIFY: CLARIFY_DESCRIPTION}
     return {
         "original": policy,
         "instruction_only": {**policy, "instructions": INSTRUCTIONS},
-        "clarification_description_only": {
-            **policy, "criteria": {**policy["criteria"], CLARIFY: CLARIFY_DESCRIPTION},
-        },
+        "clarification_description_only": {**policy, "criteria": revised_criteria},
+        "combined": {**policy, "instructions": INSTRUCTIONS, "criteria": revised_criteria},
     }
 
 
@@ -54,9 +54,13 @@ def summarize(cases, rows):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--variant", choices=("original", "instruction_only", "clarification_description_only", "combined"),
+                        help="Run just one condition, or omit to rerun the original three conditions")
     args = parser.parse_args()
     policy, queue, annotations, cases = load_reviewed_cases(DEFAULT_QUEUE, DEFAULT_POLICY, DEFAULT_LOCAL)
-    prompts = variants(policy)
+    available = variants(policy)
+    selected = [args.variant] if args.variant else ["original", "instruction_only", "clarification_description_only"]
+    prompts = {name: available[name] for name in selected}
     out = args.output_dir or ROOT / "outputs" / datetime.now(timezone.utc).strftime("prompt-ablation-%Y%m%dT%H%M%S%fZ")
     out.mkdir(parents=True, exist_ok=False)
     model, lock, _, load_seconds = load_local_model("cpu")
@@ -70,6 +74,7 @@ def main():
         "policy_sha256": policy_hash(policy), "policy_id": policy["policy_id"],
         "model_id": lock["model_id"], "model_revision": lock["revision"],
         "strategy": "single", "candidate_order": list(policy["criteria"]), "model_load_seconds": load_seconds,
+        "variants": selected, "planned_model_calls": len(cases) * len(selected),
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "environment": {"python": sys.version.split()[0], "platform": platform.platform(),
                         "device": str(next(model.parameters()).device), "torch_threads": torch.get_num_threads(),

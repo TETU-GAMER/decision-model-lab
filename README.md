@@ -1,20 +1,22 @@
 # decision-model-lab
 
-A local ticket-routing experiment built around an existing decision model. Given a support ticket, it selects billing, technical support, delivery, or needs clarification and records the model's scores for each option.
+简体中文 | [English](README.en.md)
 
-The current routing policy follows the customer's stated priority. It asks for clarification when the ticket gives too little detail to identify a team or presents equally important issues for different teams. The project uses the published model weights for inference.
+一个在本机运行的客服工单分类实验。输入一条工单，使用公开的决策模型在账单、技术支持、配送和需要澄清中选一项，并保存每项的分数。
 
-## Results
+按客户明确提出的优先事项分配工单。如果信息不足以确定部门，或多个同等重要的问题涉及不同部门，就选择需要澄清。
 
-- **Prompt wording.** On the same 24 tickets, shortening the task instruction reduced clarification predictions from 24 to 20 and increased matches from 6 to 8. Changing only the clarification description reduced those predictions to 19 and increased matches to 9. Both edits sent one ticket that required clarification to delivery. [Prompt ablation](results/prompt-ablation-v1/README.md)
-- **Candidate order.** Two exploratory batches used 600 local model calls in total. Averaging four rotations reduced the number of tickets whose selected team changed from 7/12 to 1/12 in the first batch and from 6/12 to 2/12 in the second. Sorting by candidate ID gives the model a fixed order with one call per ticket. [Strategy comparison](results/strategy-comparison-v1/README.md)
-- **Development-set accuracy.** On 24 reviewed tickets, the keyword baseline matched 24/24 labels. The model matched 6/24 with the original order, 7/24 with fixed sorting, and 6/24 with four rotations. The original order and four rotations both selected needs clarification for every ticket. [Development evaluation](results/development-evaluation-v1/README.md)
+## 实验结果
 
-These results come from small, synthetic development batches. The 24 labels were supplied or confirmed by the reviewer, sometimes with AI explanations. The keyword baseline was built with access to the development examples. Independent test accuracy remains unknown.
+- **提示词对照。** 在同样的 24 条工单上，原版误判澄清 18 条，只改指令后是 15 条，只改候选描述后是 14 条，合并两处改动后也是 14 条。合并版答对 9 条，6 条本该澄清的工单保住了 5 条。 [合并实验](results/prompt-combined-v1/README.md) | [单独改动的对照](results/prompt-ablation-v1/README.md)
+- **候选顺序。** 两批探索工单共运行 600 次本地推理。四次轮换取平均后，第一批会因换顺序而改选的工单从 7/12 条降到 1/12 条，第二批从 6/12 条降到 2/12 条。固定排序每条工单只需调用一次。 [策略对照](results/strategy-comparison-v1/README.md)
+- **开发集分类。** 在 24 条已审核工单上，关键词规则匹配 24 条，模型原顺序匹配 6 条、固定排序匹配 7 条、四次轮换平均匹配 6 条。原顺序和四次轮换平均都把 24 条工单选成了需要澄清。 [开发集评测](results/development-evaluation-v1/README.md)
 
-## Run locally
+工单是 AI 构造的开发样例。24 条标签由审核者提供或确认，部分参考了 AI 的解释。编写关键词规则时已接触这些工单，独立测试表现仍待验证。
 
-The commands below were verified on Windows x64 with Python 3.11 and CPU inference. Install Git and Python, then run:
+## 本地运行
+
+已在 Windows x64、Python 3.11 和 CPU 环境验证。安装 Git 和 Python 后执行以下命令。
 
 ```powershell
 git clone https://github.com/TETU-GAMER/decision-model-lab.git
@@ -24,32 +26,33 @@ python -m venv .venv
 & '.\.venv\Scripts\python.exe' -X utf8 download_model.py
 ```
 
-The download is approximately 2.32 GB. It uses the pinned model revision and verifies the files before the inference entry points load the custom code. Inference runs locally and writes responses to `outputs/`.
+模型下载约 2.32 GB。下载脚本按固定版本获取文件并校验，推理时在本机加载模型，结果写入 `outputs/`。
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --strategy single --text 'My parcel was delivered to the wrong address.'
 ```
 
-The available strategies are `single`, `sorted`, `cyclic4`, and `all24`, requiring 1, 1, 4, and 24 model calls per ticket respectively. `route_ticket.py` defaults to `cyclic4` and reads `data/task_policy_v1.json`. It saves every model response and requires all calls to succeed before averaging their scores. The model scores are uncalibrated.
+四种策略分别是原顺序 `single`、固定排序 `sorted`、四次轮换平均 `cyclic4` 和全排列平均 `all24`，每条工单分别调用 1、1、4 和 24 次。入口默认使用 `cyclic4`，读取 `data/task_policy_v1.json`。每次调用的原始响应都会保存，全部调用成功后才计算平均分数。模型分数尚未校准。
 
-The original teaching example has a separate entry point. Its `--validate-only` option checks the input structure without loading the model. [First model response](results/demo-001.json)
+教学例子可以单独运行。加上 `--validate-only` 可只检查输入格式。 [首条模型响应](results/demo-001.json)
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 run_example.py --device cpu
 ```
 
-## Review and evaluate
+## 工单审核与评测
 
-The review tool shows up to three tickets per session, with a Chinese reading aid. Choose `b`, `t`, `d`, or `c` for billing, technical support, delivery, or needs clarification. Enter a reason to save each review. Labels and reasons are stored in the Git-ignored `local_review/` directory.
+审核工具每次最多显示三条工单，附中文释义。用 `b`、`t`、`d`、`c` 选择账单、技术支持、配送或需要澄清，再输入一句理由保存。标签和理由保存在本机 `local_review/`，该目录由 Git 忽略。
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 review_cases.py
 & '.\.venv\Scripts\python.exe' -X utf8 run_evaluation.py --validate-only
 & '.\.venv\Scripts\python.exe' -X utf8 run_evaluation.py
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation --variant combined
 ```
 
-The evaluation requires a complete review and produces accuracy, macro-F1, technical failure counts, and a confusion matrix. A fresh clone needs its own completed reviews. [Review and evaluation guide](docs/REVIEW_AND_EVALUATION.md)
+评测需要完整标签，输出准确率、Macro-F1、技术失败数和混淆矩阵。新克隆的仓库需先完成一份本机审核。 [审核与评测说明](docs/REVIEW_AND_EVALUATION.md)
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 -m unittest discover -s tests -v
@@ -57,8 +60,8 @@ The evaluation requires a complete review and produces accuracy, macro-F1, techn
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.compare_routing_strategies --run-dir results/order-probe-v1
 ```
 
-## Model provenance
+## 模型来源
 
-vLLM Semantic Router publishes Decision-1.0-Kai-0.6B. This project pins revision `ee45160abf994a9eca0e59495bd9b4bf08c1571a`. The checkpoint and upstream Python files are downloaded from Hugging Face. [Pinned model files](https://huggingface.co/vllm-sr/Decision-1.0-Kai-0.6B/tree/ee45160abf994a9eca0e59495bd9b4bf08c1571a)
+Decision-1.0-Kai-0.6B 由 vLLM Semantic Router 发布。本项目使用固定提交 `ee45160abf994a9eca0e59495bd9b4bf08c1571a`，权重和原始推理代码从 Hugging Face 下载。 [固定版本文件](https://huggingface.co/vllm-sr/Decision-1.0-Kai-0.6B/tree/ee45160abf994a9eca0e59495bd9b4bf08c1571a)
 
-The manifest records file sizes and hashes. The provenance notes cover licensing and the Transformers loading workaround. [Model manifest](model-lock.json) | [Provenance notes](MODEL_PROVENANCE.md)
+模型清单记录文件大小和校验值。来源说明包含许可条款及 Transformers 加载兼容处理。 [模型清单](model-lock.json) | [来源说明](MODEL_PROVENANCE.md)

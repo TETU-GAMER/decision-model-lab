@@ -1,0 +1,54 @@
+{
+  "created_at_utc": "2026-11-17T20:30:26.549240+00:00",
+  "purpose": "development_review_previously_probed_cases",
+  "sample_count": 24,
+  "annotation_provenance": {
+    "label_count": 24,
+    "label_counts": {
+      "billing": 6,
+      "technical": 6,
+      "delivery": 6,
+      "needs_clarification": 6
+    },
+    "assistance_counts": {
+      "user_label_and_reason": 9,
+      "ai_explanation_then_user_confirmation": 12,
+      "user_label_with_ai_generated_reason": 3
+    },
+    "ai_reasons_not_confirmed_by_user": 3,
+    "note": "User-provided or user-confirmed labels, including AI-assisted decisions; not independent blind annotation."
+  },
+  "annotations_sha256": "93f68276018b99dddbbbcfdf7aa9b7b41f34c52c882869b7c6e89099d88b6e1d",
+  "queue_sha256": "f1361bac742fa441a305a61f7faa00b6c4e83b8b47357c084dfbf9ce34b9b14c",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "policy_id": "ticket-routing-v1",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "strategy": "single",
+  "candidate_order": [
+    "billing",
+    "technical",
+    "delivery",
+    "needs_clarification"
+  ],
+  "model_load_seconds": 4.214585300011095,
+  "variants": [
+    "combined"
+  ],
+  "planned_model_calls": 24,
+  "runner_sha256": "28aa5bbcbbc9929a9b634d4c57c64990a4bb82b8aabb7c88e5c546056d23994f",
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "torch_threads": 14,
+    "dtype": "torch.float32",
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0",
+      "tokenizers": "0.22.2"
+    }
+  }
+}
