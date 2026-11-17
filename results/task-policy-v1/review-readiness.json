@@ -1,0 +1,37 @@
+{
+  "checked_at_utc": "2026-11-17T17:35:17.477470+00:00",
+  "command": "run_evaluation.py --validate-only",
+  "exit_code": 2,
+  "status": {
+    "purpose": "development_review_previously_probed_cases",
+    "total_cases": 24,
+    "reviewed_cases": 3,
+    "pending_case_ids": [
+      "order-001",
+      "order-002",
+      "order-004",
+      "order-005",
+      "order-006",
+      "order-007",
+      "order-008",
+      "order-009",
+      "order-010",
+      "order-011",
+      "order-012",
+      "fresh-001",
+      "fresh-002",
+      "fresh-003",
+      "fresh-005",
+      "fresh-006",
+      "fresh-007",
+      "fresh-008",
+      "fresh-010",
+      "fresh-011",
+      "fresh-012"
+    ],
+    "scoring_ready": false,
+    "policy_id": "ticket-routing-v1",
+    "planned_model_calls_if_ready": 144
+  },
+  "classification_metrics": null
+}

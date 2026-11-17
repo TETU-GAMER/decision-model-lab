@@ -50,10 +50,12 @@
 在已准备好环境和模型的仓库根目录执行：
 
 ```powershell
-& '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --strategy cyclic4 --text 'The approved refund has not appeared in my bank account after ten business days.'
+& '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --legacy-demo-config --strategy cyclic4 --text 'The approved refund has not appeared in my bank account after ten business days.'
 ```
 
-这条命令已真实运行，四次模型调用全部成功，聚合后选择 `billing`，概率为 0.44682589918375015。完整记录见 [ticket-cyclic4-example.json](ticket-cyclic4-example.json)。该示例是既有工单的入口演示，不计作新批次样例。
+该工单已在旧版入口真实运行，四次模型调用全部成功，聚合后选择 `billing`，概率为 0.44682589918375015。完整记录见 [ticket-cyclic4-example.json](ticket-cyclic4-example.json)。该示例是既有工单的入口演示，不计作新批次样例。
+
+该记录使用当时的教学指令。当前默认入口已改用 `ticket-routing-v1`，因此复现这里的指令需要显式选择 `--legacy-demo-config`；原始结果没有改动。
 
 可以把 `--strategy` 改成 `single`、`sorted` 或 `all24`。默认值为 `cyclic4`，执行前会打印预计调用数。结果写入本机 `outputs/ticket-*.json`，不会自动上传用户新输入。
 

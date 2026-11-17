@@ -1,0 +1,226 @@
+{
+  "created_at_utc": "2026-11-17T17:28:18.233312+00:00",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "model_load_seconds": 6.24546599999303,
+  "routing_sha256": "d8f25d51050d3842774bd8b1254dfe4fc1dd9e9ce4561d4be19ecfdb7a6d232f",
+  "configuration_sha256": "6b397bf5292d74d57bcfa74a8a1cd7aa800603e6b6d030ec6afa6fcafd9d3d03",
+  "task_policy_id": "ticket-routing-v1",
+  "task_policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "environment": {
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "packages": {
+      "torch": "2.6.0+cpu",
+      "transformers": "4.57.6",
+      "safetensors": "0.6.2",
+      "huggingface_hub": "0.36.0"
+    }
+  },
+  "result": {
+    "strategy": "cyclic4",
+    "model_calls": 4,
+    "successful_calls": 4,
+    "raw_calls": [
+      {
+        "index": 0,
+        "candidate_order": [
+          "billing",
+          "technical",
+          "delivery",
+          "needs_clarification"
+        ],
+        "request": {
+          "state": "My card was charged twice. Please fix my login first.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+              "criteria": {
+                "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+                "technical": "Software errors, API failures and account access problems when these are the primary request",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+                "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "needs_clarification",
+              "confidence": 0.7749569192528725,
+              "probabilities": {
+                "billing": 0.09167619794607162,
+                "technical": 0.03432873636484146,
+                "delivery": 0.007361938711255789,
+                "needs_clarification": 0.8666331171989441
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.35442399999010377
+      },
+      {
+        "index": 1,
+        "candidate_order": [
+          "technical",
+          "delivery",
+          "needs_clarification",
+          "billing"
+        ],
+        "request": {
+          "state": "My card was charged twice. Please fix my login first.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+              "criteria": {
+                "technical": "Software errors, API failures and account access problems when these are the primary request",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+                "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request",
+                "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "needs_clarification",
+              "confidence": 0.5095221251249313,
+              "probabilities": {
+                "technical": 0.05135228857398033,
+                "delivery": 0.014758042991161346,
+                "needs_clarification": 0.7217058539390564,
+                "billing": 0.21218372881412506
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.36010319998604245
+      },
+      {
+        "index": 2,
+        "candidate_order": [
+          "delivery",
+          "needs_clarification",
+          "billing",
+          "technical"
+        ],
+        "request": {
+          "state": "My card was charged twice. Please fix my login first.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+              "criteria": {
+                "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request",
+                "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request",
+                "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+                "technical": "Software errors, API failures and account access problems when these are the primary request"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "needs_clarification",
+              "confidence": 0.5000763088464737,
+              "probabilities": {
+                "delivery": 0.018611112609505653,
+                "needs_clarification": 0.6854307651519775,
+                "billing": 0.11060361564159393,
+                "technical": 0.18535445630550385
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.3681732999975793
+      },
+      {
+        "index": 3,
+        "candidate_order": [
+          "needs_clarification",
+          "billing",
+          "technical",
+          "delivery"
+        ],
+        "request": {
+          "state": "My card was charged twice. Please fix my login first.",
+          "questions": {
+            "route": {
+              "type": "choice",
+              "instructions": "Choose the team that should handle the customer's primary request. If one primary request is explicitly identified, route to that team even when a secondary problem is mentioned. If multiple independent problems require different teams and no primary request is clear, select needs_clarification. Also select needs_clarification when there is insufficient information to identify a team.",
+              "criteria": {
+                "needs_clarification": "Insufficient information, or multiple equally important requests for different teams with no clear primary request",
+                "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+                "technical": "Software errors, API failures and account access problems when these are the primary request",
+                "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request"
+              }
+            }
+          }
+        },
+        "response": {
+          "model": "Decision-1.0-Kai-0.6B",
+          "answers": {
+            "route": {
+              "type": "choice",
+              "choice": "needs_clarification",
+              "confidence": 0.6448757648468018,
+              "probabilities": {
+                "needs_clarification": 0.7713488340377808,
+                "billing": 0.126473069190979,
+                "technical": 0.08284039050340652,
+                "delivery": 0.019337693229317665
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 0
+          }
+        },
+        "status": "ok",
+        "inference_seconds": 0.3652617000043392
+      }
+    ],
+    "probability_note": "Uncalibrated mean model probabilities, not measured correctness.",
+    "status": "ok",
+    "choice": "needs_clarification",
+    "probabilities": {
+      "billing": 0.1352341528981924,
+      "delivery": 0.015017196885310113,
+      "needs_clarification": 0.7612796425819397,
+      "technical": 0.08846896793693304
+    },
+    "top_two_margin": 0.6260454896837473,
+    "vote_counts": {
+      "needs_clarification": 4
+    }
+  }
+}

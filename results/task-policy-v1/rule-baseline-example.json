@@ -1,0 +1,22 @@
+{
+  "purpose": "constructed_policy_illustration_not_scored_evaluation",
+  "state": "My card was charged twice. Please fix my login first.",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "result": {
+    "choice": "technical",
+    "matches": {
+      "billing": [
+        "charged"
+      ],
+      "technical": [
+        "login"
+      ],
+      "delivery": []
+    },
+    "primary_clause_matches": [
+      "technical"
+    ],
+    "model_calls": 0,
+    "probabilities": null
+  }
+}

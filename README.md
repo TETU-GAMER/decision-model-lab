@@ -4,6 +4,22 @@
 
 目前已完成本地工单路由、两批共 600 次候选顺序实验，以及四种路由策略的回放对照。尚未训练、微调或开展有独立真值的正式评测。实验代码由 AI 辅助实现；使用者参与需求、技术取舍与结果分析。
 
+## 任务规则与人工审核
+
+当前采用 `ticket-routing-v1`：**明确主要诉求优先分配；多个独立问题同等重要且没有明确主次时，选择需要澄清。** 规则已接入默认路由指令，旧实验及其原始指令保持原样。
+
+已补上 24 条开发工单的审核队列、英文关键词规则基线和评测脚本。默认每次最多审核 3 条，提供中文参考释义，不展示模型预测：
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 review_cases.py
+```
+
+按 `b`、`t`、`d`、`c` 选择账单、技术支持、配送、需要澄清，并填写一句理由。每条完成即保存，下次继续。人工标注保存在被 Git 排除的 `local_review/` 中。
+
+[审核和评测说明](docs/REVIEW_AND_EVALUATION.md)列出了完整命令。标签补齐前不进行评分；补齐后可比较规则和模型方法的准确率、Macro-F1 及失败率。这些旧探索样例审核后仍属于开发材料。
+
+新规则的一次真实调用暴露了失败：“重复扣款，请先解决登录问题”仍被模型分到需要澄清。[完整记录](results/task-policy-v1/README.md)保留了新指令、原始响应和当前审核状态。29 项离线检查通过，尚未生成分类准确率结果。
+
 ## 模型来源与版本
 
 - 发布者：vLLM Semantic Router（Hugging Face 账号 `vllm-sr`）。
@@ -19,10 +35,12 @@
 在完成下方的环境准备及模型下载后，可直接输入工单：
 
 ```powershell
-& '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --strategy cyclic4 --text 'The approved refund has not appeared in my bank account after ten business days.'
+& '.\.venv\Scripts\python.exe' -X utf8 route_ticket.py --strategy cyclic4 --text 'My card was charged twice. Please fix my login first.'
 ```
 
 支持原样调用 `single`、固定排序 `sorted`、四次轮换平均 `cyclic4`、全排列平均 `all24`，每条新工单分别需要 1、1、4、24 次模型调用。默认 `cyclic4`；执行前显示调用数，结果保留完整子请求。任一子调用失败就停止聚合，不返回部分平均结果。
+
+默认任务指令来自 `data/task_policy_v1.json`。复现早期教学指令的路由示例时，加上 `--legacy-demo-config`；输出会记录实际规则 ID 和配置摘要。
 
 两批探索材料的回放对照中，四次轮换平均使发生改选的工单数从旧批次的 7/12 降到 1/12，新批次从 6/12 降到 2/12。固定排序只调用一次，两批均不随外部排列改选；这来自输入被固定。当前只比较顺序稳定性，尚不能判断谁更准确。
 
