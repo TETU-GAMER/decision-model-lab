@@ -1,0 +1,105 @@
+{
+  "source": {
+    "strategy": "two_stage",
+    "purpose": "development_review_previously_probed_cases",
+    "sample_count": 24,
+    "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+    "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+    "annotations_sha256": "93f68276018b99dddbbbcfdf7aa9b7b41f34c52c882869b7c6e89099d88b6e1d",
+    "queue_sha256": "f1361bac742fa441a305a61f7faa00b6c4e83b8b47357c084dfbf9ce34b9b14c",
+    "policy_id": "ticket-routing-v1",
+    "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050"
+  },
+  "score": "gate.probabilities.needs_clarification",
+  "threshold_rule": "Clarify when the score is at least the cutoff. A null cutoff routes all tickets.",
+  "orders": {
+    "route-first": {
+      "distinct_threshold_outcomes": 25,
+      "groups": {
+        "needs_clarification": {
+          "count": 6,
+          "min": 0.20723040401935577,
+          "median": 0.2702765464782715,
+          "max": 0.3043712079524994
+        },
+        "assignable": {
+          "count": 18,
+          "min": 0.14616720378398895,
+          "median": 0.22844979912042618,
+          "max": 0.32951536774635315
+        },
+        "correctly_routed": {
+          "count": 17,
+          "min": 0.14616720378398895,
+          "median": 0.22475451231002808,
+          "max": 0.32951536774635315
+        }
+      },
+      "goals": {
+        "recover_all": {
+          "threshold": 0.20723040401935577,
+          "recovered_clarifications": 6,
+          "missed_clarifications": 0,
+          "retained_correct_routes": 8,
+          "false_clarifications": 10,
+          "wrong_department": 0,
+          "correct": 14
+        },
+        "preserve_all": {
+          "threshold": null,
+          "recovered_clarifications": 0,
+          "missed_clarifications": 6,
+          "retained_correct_routes": 17,
+          "false_clarifications": 0,
+          "wrong_department": 1,
+          "correct": 17
+        },
+        "both_possible": false
+      }
+    },
+    "clarification-first": {
+      "distinct_threshold_outcomes": 25,
+      "groups": {
+        "needs_clarification": {
+          "count": 6,
+          "min": 0.15094870328903198,
+          "median": 0.1690518781542778,
+          "max": 0.240919291973114
+        },
+        "assignable": {
+          "count": 18,
+          "min": 0.10817115008831024,
+          "median": 0.16547632962465286,
+          "max": 0.20991043746471405
+        },
+        "correctly_routed": {
+          "count": 17,
+          "min": 0.10817115008831024,
+          "median": 0.16474229097366333,
+          "max": 0.20991043746471405
+        }
+      },
+      "goals": {
+        "recover_all": {
+          "threshold": 0.15094870328903198,
+          "recovered_clarifications": 6,
+          "missed_clarifications": 0,
+          "retained_correct_routes": 6,
+          "false_clarifications": 12,
+          "wrong_department": 0,
+          "correct": 12
+        },
+        "preserve_all": {
+          "threshold": 0.240919291973114,
+          "recovered_clarifications": 1,
+          "missed_clarifications": 5,
+          "retained_correct_routes": 17,
+          "false_clarifications": 0,
+          "wrong_department": 1,
+          "correct": 18
+        },
+        "both_possible": false
+      }
+    }
+  }
+}
