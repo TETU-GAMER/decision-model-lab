@@ -8,6 +8,7 @@ The current routing policy follows the customer's stated priority. It asks for c
 
 ## Results
 
+- **Deciding whether to ask a question before choosing a team.** On the same 24 tickets, the two-stage model sent 17 of 18 assignable tickets to the right team. It also sent all six tickets that needed a follow-up straight to a team. Reversing the two options in the first step left every final decision unchanged. This version is experimental. [Two-stage routing experiment](results/two-stage-v1/README.en.md)
 - **Prompt wording.** On the same 24 tickets, the original prompt incorrectly requested clarification 18 times. Editing the instruction reduced that count to 15. Editing the candidate description alone and combining both edits each reduced it to 14. The combined prompt matched 9 labels and kept 5 of the 6 required clarifications. [Combined prompt experiment](results/prompt-combined-v1/README.en.md) | [Isolated edits](results/prompt-ablation-v1/README.md)
 - **Candidate order.** Two exploratory batches used 600 local model calls in total. Averaging four rotations reduced the number of tickets whose selected team changed from 7/12 to 1/12 in the first batch and from 6/12 to 2/12 in the second. Sorting by candidate ID gives the model a fixed order with one call per ticket. [Strategy comparison](results/strategy-comparison-v1/README.md)
 - **Development-set accuracy.** On 24 reviewed tickets, the keyword baseline matched 24/24 labels. The model matched 6/24 with the original order, 7/24 with fixed sorting, and 6/24 with four rotations. The original order and four rotations both selected needs clarification for every ticket. [Development evaluation](results/development-evaluation-v1/README.md)
@@ -50,6 +51,7 @@ The review tool shows up to three tickets per session, with a Chinese reading ai
 & '.\.venv\Scripts\python.exe' -X utf8 run_evaluation.py
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation --variant combined
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.two_stage_routing
 ```
 
 The evaluation requires a complete review and produces accuracy, macro-F1, technical failure counts, and a confusion matrix. A fresh clone needs its own completed reviews. [Review and evaluation guide](docs/REVIEW_AND_EVALUATION.md)

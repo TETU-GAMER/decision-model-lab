@@ -8,6 +8,7 @@
 
 ## 实验结果
 
+- **先判断要不要追问，再选部门。** 在同一批 24 条工单上，两步法把 18 条可分单工单中的 17 条送对了部门，但也把 6 条该追问的全部分走了。调换第一步的选项顺序，24 条的最终选择都一样。这版只用于实验。 [两步分单实验](results/two-stage-v1/README.md)
 - **提示词对照。** 在同样的 24 条工单上，原版误判澄清 18 条，只改指令后是 15 条，只改候选描述后是 14 条，合并两处改动后也是 14 条。合并版答对 9 条，6 条本该澄清的工单保住了 5 条。 [合并实验](results/prompt-combined-v1/README.md) | [单独改动的对照](results/prompt-ablation-v1/README.md)
 - **候选顺序。** 两批探索工单共运行 600 次本地推理。四次轮换取平均后，第一批会因换顺序而改选的工单从 7/12 条降到 1/12 条，第二批从 6/12 条降到 2/12 条。固定排序每条工单只需调用一次。 [策略对照](results/strategy-comparison-v1/README.md)
 - **开发集分类。** 在 24 条已审核工单上，关键词规则匹配 24 条，模型原顺序匹配 6 条、固定排序匹配 7 条、四次轮换平均匹配 6 条。原顺序和四次轮换平均都把 24 条工单选成了需要澄清。 [开发集评测](results/development-evaluation-v1/README.md)
@@ -50,6 +51,7 @@ python -m venv .venv
 & '.\.venv\Scripts\python.exe' -X utf8 run_evaluation.py
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation
 & '.\.venv\Scripts\python.exe' -X utf8 -m experiments.prompt_ablation --variant combined
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.two_stage_routing
 ```
 
 评测需要完整标签，输出准确率、Macro-F1、技术失败数和混淆矩阵。新克隆的仓库需先完成一份本机审核。 [审核与评测说明](docs/REVIEW_AND_EVALUATION.md)

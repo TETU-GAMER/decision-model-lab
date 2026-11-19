@@ -44,6 +44,22 @@ def aggregate_routes(routes, candidate_ids):
             "vote_counts": dict(Counter(route["choice"] for route in routes))}
 
 
+def run_choice_call(predict, data, state, order):
+    """Capture one model call and return its validated route, if successful."""
+    request = build_request(data, {"state": state}, order)
+    call = {"candidate_order": list(order), "request": request}
+    route = None
+    started = time.perf_counter()
+    try:
+        call["response"] = predict(**request)
+        route = validate_response(call["response"], data["criteria"])
+        call["status"] = "ok"
+    except Exception as error:
+        call.update(status="error", error_type=type(error).__name__, error=str(error))
+    call["inference_seconds"] = time.perf_counter() - started
+    return call, route
+
+
 def route_with_strategy(predict, data, state, strategy="cyclic4"):
     """Call an injected model predictor; any failed call blocks aggregation."""
     if not isinstance(state, str) or not state.strip():
@@ -52,17 +68,10 @@ def route_with_strategy(predict, data, state, strategy="cyclic4"):
     calls = []
     routes = []
     for index, order in enumerate(orders):
-        request = build_request(data, {"state": state}, order)
-        call = {"index": index, "candidate_order": list(order), "request": request}
-        started = time.perf_counter()
-        try:
-            call["response"] = predict(**request)
-            routes.append(validate_response(call["response"], data["criteria"]))
-            call["status"] = "ok"
-        except Exception as error:
-            call.update(status="error", error_type=type(error).__name__, error=str(error))
-        call["inference_seconds"] = time.perf_counter() - started
-        calls.append(call)
+        call, route = run_choice_call(predict, data, state, order)
+        calls.append({"index": index, **call})
+        if route is not None:
+            routes.append(route)
     result = {"strategy": strategy, "model_calls": len(calls),
               "successful_calls": len(routes), "raw_calls": calls,
               "probability_note": "Uncalibrated mean model probabilities, not measured correctness."}

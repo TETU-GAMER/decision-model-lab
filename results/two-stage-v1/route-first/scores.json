@@ -1,0 +1,94 @@
+{
+  "two_stage": {
+    "sample_count": 24,
+    "correct": 17,
+    "accuracy": 0.7083333333333334,
+    "macro_f1": 0.6180290297937356,
+    "technical_failures": 0,
+    "missing_predictions": 0,
+    "technical_failure_rate": 0.0,
+    "per_class": {
+      "billing": {
+        "support": 6,
+        "tp": 5,
+        "fp": 0,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.8333333333333334,
+        "f1": 0.9090909090909091
+      },
+      "technical": {
+        "support": 6,
+        "tp": 6,
+        "fp": 5,
+        "fn": 0,
+        "precision": 0.5454545454545454,
+        "recall": 1.0,
+        "f1": 0.7058823529411765
+      },
+      "delivery": {
+        "support": 6,
+        "tp": 6,
+        "fp": 2,
+        "fn": 0,
+        "precision": 0.75,
+        "recall": 1.0,
+        "f1": 0.8571428571428571
+      },
+      "needs_clarification": {
+        "support": 6,
+        "tp": 0,
+        "fp": 0,
+        "fn": 6,
+        "precision": 0,
+        "recall": 0.0,
+        "f1": 0.0
+      }
+    },
+    "confusion_matrix": {
+      "billing": {
+        "billing": 5,
+        "technical": 1,
+        "delivery": 0,
+        "needs_clarification": 0,
+        "__failure__": 0
+      },
+      "technical": {
+        "billing": 0,
+        "technical": 6,
+        "delivery": 0,
+        "needs_clarification": 0,
+        "__failure__": 0
+      },
+      "delivery": {
+        "billing": 0,
+        "technical": 0,
+        "delivery": 6,
+        "needs_clarification": 0,
+        "__failure__": 0
+      },
+      "needs_clarification": {
+        "billing": 0,
+        "technical": 4,
+        "delivery": 2,
+        "needs_clarification": 0,
+        "__failure__": 0
+      }
+    },
+    "metric_note": "All reviewed cases remain in denominators. Macro-F1 uses all four fixed labels; zero divisions are zero. needs_clarification is a class, not a technical failure.",
+    "prediction_counts": {
+      "billing": 5,
+      "technical": 11,
+      "delivery": 8
+    },
+    "predicted_clarification": 0,
+    "incorrect_clarifications": 0,
+    "correct_clarifications": 0,
+    "clarification_support": 6,
+    "stage_model_calls": {
+      "gate": 24,
+      "department": 24
+    },
+    "total_model_calls": 48
+  }
+}

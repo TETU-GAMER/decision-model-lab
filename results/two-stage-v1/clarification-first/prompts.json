@@ -1,0 +1,17 @@
+{
+  "gate": {
+    "instructions": "Can you assign this ticket to one of billing, technical support, or delivery? Route it if the main issue identifies one team, including when the customer says which issue to handle first. Ask for clarification if the message is too vague to identify a team or gives equal priority to independent issues for different teams.",
+    "criteria": {
+      "needs_clarification": "Ask a follow-up question only when the message is too vague to pick a team, or when issues for different teams are equally important.",
+      "route_to_team": "One team can handle the customer's main issue or stated priority."
+    }
+  },
+  "department": {
+    "instructions": "Choose the team that best matches the customer's main issue. If the customer says which issue to handle first, use that issue.",
+    "criteria": {
+      "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+      "technical": "Software errors, API failures and account access problems when these are the primary request",
+      "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request"
+    }
+  }
+}
