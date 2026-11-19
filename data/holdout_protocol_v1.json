@@ -1,0 +1,37 @@
+{
+  "protocol_id": "prospective-26pct-v1",
+  "frozen_on": "2026-11-20",
+  "queue_sha256": "7152c39a98d6139ef7451109e1579988b8a4b18b9474a36fcf566310ae8048d3",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "gate_order": "route-first",
+  "clarification_threshold": 0.26,
+  "threshold_comparison": ">=",
+  "prompts_sha256": "d8c7d226d2bcc5730b576d6111df5acbf648f8a73f70658787bc4d44ce9fa5b0",
+  "candidate_order": {
+    "gate": [
+      "route_to_team",
+      "needs_clarification"
+    ],
+    "department": [
+      "billing",
+      "technical",
+      "delivery"
+    ]
+  },
+  "primary_measures": [
+    "Required clarifications identified divided by all tickets reviewed as needing clarification.",
+    "Unnecessary clarifications divided by all tickets reviewed as assignable."
+  ],
+  "secondary_measures": [
+    "Correct department assignments divided by all assignable tickets.",
+    "Overall correct decisions and inference failures across all 24 tickets."
+  ],
+  "review": {
+    "batch_size": 3,
+    "total_tickets": 24,
+    "procedure": "Freeze all human labels before running the model on the English tickets. The Chinese translations are for review only."
+  },
+  "development_reference": "results/clarification-thresholds-v1/README.en.md"
+}

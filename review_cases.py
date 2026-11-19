@@ -11,6 +11,7 @@ from task_policy import LABELS, fingerprint, load_policy, policy_hash, state_has
 DEFAULT_POLICY = ROOT / "data/task_policy_v1.json"
 DEFAULT_QUEUE = ROOT / "data/review_queue_v1.json"
 DEFAULT_LOCAL = ROOT / "local_review"
+HOLDOUT_PURPOSE = "prospective_holdout_review_v1"
 KEYS = {"b": "billing", "t": "technical", "d": "delivery", "c": "needs_clarification"}
 
 
@@ -51,7 +52,7 @@ def load_review_state(queue_path, policy_path, local_dir):
     policy = load_policy(policy_path)
     queue_path = Path(queue_path)
     queue = json.loads(queue_path.read_text(encoding="utf-8-sig"))
-    if queue["purpose"] != "development_review_previously_probed_cases":
+    if queue["purpose"] not in ("development_review_previously_probed_cases", HOLDOUT_PURPOSE):
         raise ValueError("Unexpected review purpose")
     if queue["policy_id"] != policy["policy_id"] or queue["policy_sha256"] != policy_hash(policy):
         raise ValueError("任务规则已变化，请为新规则生成新的审核队列。")
@@ -81,8 +82,12 @@ def load_review_state(queue_path, policy_path, local_dir):
         if review["label"] not in LABELS or review.get("source") != "human_review":
             raise ValueError("Need an explicit human review record")
         if not all(isinstance(review.get(key), str) and review[key].strip()
-                   for key in ("reason", "reviewer", "reviewed_at_utc")):
-            raise ValueError("Review requires reason, reviewer and time")
+                   for key in ("reviewer", "reviewed_at_utc")):
+            raise ValueError("Review requires reviewer and time")
+        label_only = queue["purpose"] == HOLDOUT_PURPOSE and review.get("assistance") == "user_label_only"
+        if not (label_only and review.get("reason") is None):
+            if not isinstance(review.get("reason"), str) or not review["reason"].strip():
+                raise ValueError("Review requires a reason")
     return policy, queue, annotations
 
 
@@ -94,17 +99,20 @@ def review_status(queue, annotations):
             "scoring_ready": not pending}
 
 
-def add_review(annotations, case, label, reason, reviewer):
-    if label not in LABELS or not reason.strip() or not reviewer.strip():
+def add_review(annotations, case, label, reason, reviewer, *, allow_label_only=False):
+    reason = reason.strip() if reason else None
+    if label not in LABELS or (not reason and not allow_label_only) or not reviewer.strip():
         raise ValueError("Need a valid department, reason and reviewer alias")
     if any(row["id"] == case["id"] for row in annotations["reviews"]):
         raise ValueError("Case already reviewed; preserve earlier records")
     annotations["reviews"].append({"id": case["id"], "state_sha256": case["state_sha256"],
-        "label": label, "reason": reason.strip(), "reviewer": reviewer.strip(),
+        "label": label, "reason": reason, "reviewer": reviewer.strip(),
+        **({"assistance": "user_label_only"} if not reason else {}),
         "source": "human_review", "reviewed_at_utc": datetime.now(timezone.utc).isoformat()})
 
 
 def annotate(policy, queue, annotations, local_dir, reviewer, limit, ask=input):
+    allow_label_only = queue["purpose"] == HOLDOUT_PURPOSE
     print("本轮任务规则：")
     for rule in policy["rules_zh"]:
         print("- " + rule)
@@ -126,11 +134,11 @@ def annotate(policy, queue, annotations, local_dir, reviewer, limit, ask=input):
             if answer not in KEYS:
                 print("请输入 b、t、d、c、s 或 q。")
                 continue
-            reason = ask("选择理由：").strip()
-            if not reason:
+            reason = ask("选择理由（可留空）：" if allow_label_only else "选择理由：").strip()
+            if not reason and not allow_label_only:
                 print("理由不能为空，此条尚未保存。")
                 continue
-            add_review(annotations, case, KEYS[answer], reason, reviewer)
+            add_review(annotations, case, KEYS[answer], reason, reviewer, allow_label_only=allow_label_only)
             write_json(Path(local_dir) / "annotations.json", annotations)
             with (Path(local_dir) / "events.jsonl").open("a", encoding="utf-8") as stream:
                 stream.write(json.dumps(annotations["reviews"][-1], ensure_ascii=False) + "\n")

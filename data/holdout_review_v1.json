@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "purpose": "prospective_holdout_review_v1",
+  "policy_id": "ticket-routing-v1",
+  "policy_sha256": "04eaf0f0919ec53a2668c3f31d71fcd9f2b5ca48b12b62ed2dd1d0334b520050",
+  "note": "New synthetic support tickets written for this prospective review on 2026-11-20. English is the model input. The Chinese text is a reading aid. The full queue was fixed before reviewer labels or model calls.",
+  "items": [
+    {
+      "id": "holdout-001",
+      "state": "The driver is due on Friday, when our reception desk is closed. Can the box be left at the pickup shop on Pine Street instead?",
+      "state_sha256": "ec740db0344cdb4f1ce595ba8ad1efa17e66e82193e7cc2e4f900b7c56168990",
+      "reading_aid_zh": "司机周五来送货，那天我们的前台不上班。能把箱子送到松树街的取件点吗？"
+    },
+    {
+      "id": "holdout-002",
+      "state": "We went from ten paid seats to four halfway through the month. How did you calculate what we owe for that month?",
+      "state_sha256": "3f36d816d6220079e3cba7761fe0d7bbaaef542b584eaec1665c385532031e32",
+      "reading_aid_zh": "月中我们把付费席位从十个减到了四个。那个月应付的金额是怎么算的？"
+    },
+    {
+      "id": "holdout-003",
+      "state": "I got an email that just says ‘action required’ and gives a case number. What am I supposed to do next?",
+      "state_sha256": "5c9a75d524bbaf9a84baf29abc4030b1e636a264be7ec7ad0273ef534a090504",
+      "reading_aid_zh": "我收到一封邮件，上面只写着‘需要采取行动’，还给了一个工单号。我接下来该做什么？"
+    },
+    {
+      "id": "holdout-004",
+      "state": "I can see 43 entries on the screen. When I export that same list, the CSV contains only the column headings.",
+      "state_sha256": "71421c82a0cfc2d16029e4b669f79e00100df08035b9244ad74a49e36b5206f9",
+      "reading_aid_zh": "屏幕上能看到 43 条记录，可我把这份列表导出成 CSV 文件后，里面只有列名。"
+    },
+    {
+      "id": "holdout-005",
+      "state": "We need someone to sign for the shipment at the lab. Separately, the portal keeps erasing my colleague's phone number, even on unrelated orders. Can you help with both?",
+      "state_sha256": "b75229629e87d49cdda5fffb12a32edb35d1da45a0511b45c5065d8638928eb5",
+      "reading_aid_zh": "送到实验室的货需要有人签收。另外，网站总是把我同事的电话号码清掉，连其他订单也这样。两件事都能帮忙处理吗？"
+    },
+    {
+      "id": "holdout-006",
+      "state": "Captions work for the first few seconds of every training video, then the words stop changing while the speaker carries on talking.",
+      "state_sha256": "8d1474f43fd6234f2e29e7277ec3aa475c4dc352970416be1d4de005f56bd826",
+      "reading_aid_zh": "每段培训视频的字幕头几秒都正常，之后讲话的人还在继续说，字幕却停在了原处。"
+    },
+    {
+      "id": "holdout-007",
+      "state": "I returned a coat that cost 60 euros and got 54 euros back. Could you tell me what the six euros were deducted for?",
+      "state_sha256": "7005d8c8dbcdf0d7dc601c67088d634b343215569b625ef559ff6d036461d8bd",
+      "reading_aid_zh": "我退了一件 60 欧元的外套，收到了 54 欧元。能告诉我那 6 欧元是因为什么扣的吗？"
+    },
+    {
+      "id": "holdout-008",
+      "state": "I kept the afternoon free for someone to pick up the return. Nobody came, and the box is still here. Can we book another collection?",
+      "state_sha256": "340e6f8f9cc2718917417cee022c2210fd8723f1fd2879740a1f12dc4101313a",
+      "reading_aid_zh": "我空出一下午等人来取退货，结果没人来，箱子还在我这里。能再约一次上门取件吗？"
+    },
+    {
+      "id": "holdout-009",
+      "state": "There's an orange triangle beside yesterday's entry. It has no caption. What do I need to do about it?",
+      "state_sha256": "7efa2dd179352acf77f6353342d1aa58d488f496fea6b0116439bfc861eb059a",
+      "reading_aid_zh": "昨天那条记录旁边多了一个橙色三角形，没有任何说明。我需要怎么处理？"
+    },
+    {
+      "id": "holdout-010",
+      "state": "My bank lists this purchase in yen. Before I ask them about the conversion, could you tell me the amount and currency you originally billed?",
+      "state_sha256": "55921da8b715353e51d35af27a952e1b92de59dbfc0c6d18b0eeda547e91351c",
+      "reading_aid_zh": "我的银行把这笔消费列成了日元。在我找银行问汇率之前，能告诉我你们最初用什么币种收了多少钱吗？"
+    },
+    {
+      "id": "holdout-011",
+      "state": "I left a workspace last week but still get its push notifications on my phone. I've already turned off notifications for that workspace in the app.",
+      "state_sha256": "5827dd0c766d6b71648dfce284595d970c332df827254c1b340c09f323b05063",
+      "reading_aid_zh": "我上周就退出了一个工作区，现在手机上还会收到它的推送。我已经在应用里关掉了那个工作区的通知。"
+    },
+    {
+      "id": "holdout-012",
+      "state": "The carrier sent the parcel back before I could collect it. Could you arrange another delivery to the same address?",
+      "state_sha256": "73077e96ebb4fb4a7b22db29e9ba2e6cee6d1f4de1b5ab3a098a9ad614b4cfe1",
+      "reading_aid_zh": "我还没来得及取件，承运商就把包裹退回去了。能安排再送一次到原地址吗？"
+    },
+    {
+      "id": "holdout-013",
+      "state": "Your statement still lists our bank transfer as unpaid. The download button is stuck too, but please match the transfer to our order first.",
+      "state_sha256": "5a2a7213e0cbae7f3efb6134eb47f8b92d91cd57d2213b69931b985805f080fe",
+      "reading_aid_zh": "我们已经转账，你们的对账单上却还写着未付款。下载按钮也卡住了，不过请先把这笔转账核对到我们的订单上。"
+    },
+    {
+      "id": "holdout-014",
+      "state": "Two notices came this morning with different deadlines. Neither says what they're about. Which one applies to me?",
+      "state_sha256": "58ca10c3ab80546cf095a44b7425a7ea115bfedb302d3510abef809a35025540",
+      "reading_aid_zh": "今天早上我收到了两份通知，截止日期不一样，也都没说是为了什么。哪个日期对我有效？"
+    },
+    {
+      "id": "holdout-015",
+      "state": "My weekly reminder is set for 9 a.m. London time. Since the clocks changed, it goes off at eight even though the settings still say nine.",
+      "state_sha256": "0b806e4b1b1ff4c2bcdc59f01dc4a5874eb363884b3d9a8bd63e2d03bf244227",
+      "reading_aid_zh": "我把每周提醒设在伦敦时间上午九点。时钟换季调过之后，设置里仍然写着九点，提醒却会在八点响。"
+    },
+    {
+      "id": "holdout-016",
+      "state": "Who takes over my international shipment after it clears customs? I'd like the name of the carrier so I can contact the local depot.",
+      "state_sha256": "0bdfc138731c978cd8e4ddfd498b4ce431ad489b2183e8115f8f1899f4e56d57",
+      "reading_aid_zh": "我的国际包裹清关后由哪家公司接手？我想知道承运商的名字，好联系当地的站点。"
+    },
+    {
+      "id": "holdout-017",
+      "state": "We sent you our tax exemption certificate before buying the equipment. Why does this purchase still include sales tax?",
+      "state_sha256": "1ac1e2b0f2b8517aedfff855b47800158c9b8843ae998456f93ad2a3ea0477d5",
+      "reading_aid_zh": "我们购买设备前已经把免税证明交给了你们，为什么这笔消费还是含了销售税？"
+    },
+    {
+      "id": "holdout-018",
+      "state": "I'll need proof of payment eventually. For now please help me open the shared folder. My teammates can still get in, but I see ‘permission denied’.",
+      "state_sha256": "84209d5c4fd36fc9094dcb5130a408f42bb0bfb1b29c250aec32d6b5ff4a6b3a",
+      "reading_aid_zh": "付款凭证我过些时候会要。现在请先帮我打开共享文件夹。同事都还能进去，只有我这里提示‘权限不足’。"
+    },
+    {
+      "id": "holdout-019",
+      "state": "The replacement part should go to our warehouse and the documents to our office. Can you confirm the address on each shipping label before they leave?",
+      "state_sha256": "df7f0e536dda3503d290f9de06862fffa589838ebf34b80f276294bff12e0266",
+      "reading_aid_zh": "替换零件要去仓库，文件要寄到办公室。寄出之前，能帮我确认两个面单上各写的是什么地址吗？"
+    },
+    {
+      "id": "holdout-020",
+      "state": "My screen reader reads every menu item twice. Also, the latest bill lists a seat we never ordered. I need both looked into.",
+      "state_sha256": "50b01bd28fb483bb6b977dd64a27edf423965486b3e696b70b28cbb155d0fbcd",
+      "reading_aid_zh": "我的屏幕阅读器会把每个菜单项读两遍。另外，最新的账单里有一个我们从没订过的席位。两件事都请帮我查一下。"
+    },
+    {
+      "id": "holdout-021",
+      "state": "The furniture comes on a wooden pallet. Will the driver take the pallet away when they drop the furniture off? We have nowhere to store it.",
+      "state_sha256": "bb6840865b32494afe0da23723c054085f4847ecf9e011e53fd42656b531b58c",
+      "reading_aid_zh": "家具是放在木托盘上送来的。司机送到后会把托盘带走吗？我们这里没有地方放。"
+    },
+    {
+      "id": "holdout-022",
+      "state": "I paid for two items partly with a gift card and partly with my debit card. If I return just one item, where will that money go?",
+      "state_sha256": "c47745c6495e47a7c9a3c93b57e5212c859ed031299471c91ce5faa4c684ffe2",
+      "reading_aid_zh": "我买两件商品时，一部分用礼品卡付，一部分用借记卡付。如果只退其中一件，那笔钱会退到哪里？"
+    },
+    {
+      "id": "holdout-023",
+      "state": "I type a note in Japanese and it looks fine until I save it. When I reopen the note every character is a question mark.",
+      "state_sha256": "12c17cadd6ddd972c76070cf82bc73e097abffa423b015866f528a9b9d65a838",
+      "reading_aid_zh": "我输入了一段日文，保存前看着都正常。保存后再打开，所有字都变成了问号。"
+    },
+    {
+      "id": "holdout-024",
+      "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today.",
+      "state_sha256": "579ed326dd1503c2802630d4b050ec8030d41c5a95bddb3d8e659318c1bdf111",
+      "reading_aid_zh": "快递员下次送货时需要我的房号，上个月该记入我账户余额的抵扣额也还没显示。我希望这两件事今天都能处理。"
+    }
+  ]
+}

@@ -44,7 +44,14 @@ python -m venv .venv
 
 ## 工单审核与评测
 
-审核工具每次最多显示三条工单，附中文释义。用 `b`、`t`、`d`、`c` 选择账单、技术支持、配送或需要澄清，再输入一句理由保存。标签和理由保存在本机 `local_review/`，该目录由 Git 忽略。
+另准备了 24 条新编工单，检验开发集上选出的 26% 分界线。“直接分单”排在第一位，澄清分数达到 26% 就追问。审核者每次看三条，整批标签定下后再运行模型。届时分别统计该追问的工单里认出了多少，以及可直接分单的工单里有多少被多问。 [固定的实验设置](data/holdout_protocol_v1.json)
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 review_cases.py --queue data/holdout_review_v1.json --local-dir local_review/holdout_v1
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.two_stage_routing --holdout
+```
+
+审核工具默认每次显示三条工单，附中文释义。用 `b`、`t`、`d`、`c` 选择账单、技术支持、配送或需要澄清。新批次可以只给类别，下面的开发集审核还需一句理由。标签和理由保存在本机 `local_review/`，该目录由 Git 忽略。
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 review_cases.py

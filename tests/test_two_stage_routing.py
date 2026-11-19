@@ -1,7 +1,12 @@
 import unittest
-from unittest.mock import Mock
+from contextlib import redirect_stdout
+from io import StringIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import Mock, patch
 
-from experiments.two_stage_routing import route_two_stage, stage_prompts
+from evaluation import ReviewPending
+from experiments.two_stage_routing import HOLDOUT_LOCAL, HOLDOUT_QUEUE, main, route_two_stage, stage_prompts
 from review_cases import DEFAULT_POLICY
 from task_policy import load_policy
 
@@ -37,6 +42,31 @@ class TwoStageRoutingTests(unittest.TestCase):
         self.assertEqual((result["status"], result["choice"], result["model_calls"]),
                          ("ok", "needs_clarification", 1))
         self.assertEqual([call["stage"] for call in result["raw_calls"]], ["gate"])
+
+    def test_frozen_cutoff_is_inclusive_and_preserves_the_raw_gate_response(self):
+        for score, expected, calls in [(.26, "needs_clarification", 1), (.2599999, "technical", 2)]:
+            with self.subTest(score=score):
+                gate = choice_response("route_to_team", self.gate)
+                gate["answers"]["route"]["probabilities"] = {
+                    "route_to_team": 1 - score, "needs_clarification": score,
+                }
+                predict = Mock(side_effect=[gate, choice_response("technical", self.departments)])
+                result = route_two_stage(predict, self.prompts, self.state, clarification_threshold=.26)
+                self.assertEqual((result["status"], result["choice"], predict.call_count), ("ok", expected, calls))
+                self.assertEqual(result["raw_calls"][0]["response"]["answers"]["route"]["choice"],
+                                 "route_to_team")
+                self.assertEqual(result["raw_calls"][0]["threshold_decision"],
+                                 "route_to_team" if calls == 2 else "needs_clarification")
+
+    def test_holdout_waits_for_complete_review_before_creating_outputs_or_loading_model(self):
+        with TemporaryDirectory() as tmp, patch("experiments.two_stage_routing.load_reviewed_cases",
+                side_effect=ReviewPending("Review pending")) as review, patch(
+                "experiments.two_stage_routing.load_local_model") as loader, redirect_stdout(StringIO()):
+            out = Path(tmp) / "pending"
+            self.assertEqual(main(["--holdout", "--output-dir", str(out)]), 2)
+            review.assert_called_once_with(HOLDOUT_QUEUE, DEFAULT_POLICY, HOLDOUT_LOCAL)
+            loader.assert_not_called()
+            self.assertFalse(out.exists())
 
     def test_department_step_receives_original_text_and_three_department_choices(self):
         responses = [choice_response("route_to_team", self.gate),

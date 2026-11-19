@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from evaluation import ReviewPending, load_reviewed_cases, score_predictions
-from review_cases import add_review, annotate, load_review_state, prepare_queue, review_status, write_json
+from review_cases import HOLDOUT_PURPOSE, add_review, annotate, load_review_state, prepare_queue, review_status, write_json
 from rule_baseline import route_by_rules
 from run_evaluation import evaluate_methods, main as evaluation_main
 from run_example import ROOT
@@ -117,6 +117,21 @@ class ReviewWorkflowTests(unittest.TestCase):
         self.assertEqual(review_status(queue, annotations)["reviewed_cases"], 1)
         self.assertEqual(review_status(queue, annotations)["pending_case_ids"], ["fixture-2"])
         self.assertTrue((self.local / "events.jsonl").is_file())
+
+    def test_holdout_accepts_explicit_label_without_a_written_reason(self):
+        self.queue["purpose"] = HOLDOUT_PURPOSE
+        write_json(self.queue_path, self.queue)
+        policy, queue, annotations = self.load()
+        answers = iter(["b", ""])
+        with contextlib.redirect_stdout(io.StringIO()):
+            annotate(policy, queue, annotations, self.local, "unit-test-fixture", 1, ask=lambda _: next(answers))
+        _, _, saved = self.load()
+        first = saved["reviews"][0]
+        self.assertEqual(first["label"], "billing")
+        self.assertEqual(first["assistance"], "user_label_only")
+        self.assertIsNone(first["reason"])
+        with self.assertRaises(ReviewPending):
+            load_reviewed_cases(self.queue_path, self.policy_path, self.local)
 
     def test_policy_and_text_changes_invalidate_existing_binding(self):
         self.complete_fixture_reviews()

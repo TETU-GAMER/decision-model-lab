@@ -44,7 +44,14 @@ The original teaching example has a separate entry point. Its `--validate-only` 
 
 ## Review and evaluate
 
-The review tool shows up to three tickets per session, with a Chinese reading aid. Choose `b`, `t`, `d`, or `c` for billing, technical support, delivery, or needs clarification. Enter a reason to save each review. Labels and reasons are stored in the Git-ignored `local_review/` directory.
+A fresh batch of 24 synthetic tickets tests the 26% cutoff chosen on the development set. The gate lists “route to team” first and asks for clarification at or above 26%. The reviewer sees three tickets at a time. Inference starts after all labels are recorded. We count how many required clarifications are caught and how many assignable tickets receive an unnecessary question, each against its own group size. [Frozen experiment settings](data/holdout_protocol_v1.json)
+
+```powershell
+& '.\.venv\Scripts\python.exe' -X utf8 review_cases.py --queue data/holdout_review_v1.json --local-dir local_review/holdout_v1
+& '.\.venv\Scripts\python.exe' -X utf8 -m experiments.two_stage_routing --holdout
+```
+
+The review tool shows three tickets per session by default, with a Chinese reading aid. Choose `b`, `t`, `d`, or `c` for billing, technical support, delivery, or clarification. A reason is optional for the new batch and required for the development set below. Labels and reasons are stored in the Git-ignored `local_review/` directory.
 
 ```powershell
 & '.\.venv\Scripts\python.exe' -X utf8 review_cases.py
