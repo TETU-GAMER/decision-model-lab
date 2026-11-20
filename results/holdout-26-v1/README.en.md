@@ -20,3 +20,12 @@ A customer who paid with a gift card and a debit card wanted to know where a par
 All 24 tickets were newly written synthetic examples. The reviewer classified them three at a time and completed the batch before inference began. The model used the original English text and the pinned weights without fine-tuning. The first step listed “route to team” first. A clarification score at or above 26% triggered a question, and only tickets below the cutoff went on to department selection. All 24 first-step calls and 13 department calls succeeded. [Frozen protocol](../../data/holdout_protocol_v1.json) · [Prompts](prompts.json)
 
 With the pinned model and a completed local review, run `python -X utf8 -m experiments.two_stage_routing --holdout` from the repository root. Different review labels can change the evaluation scores. [Scores and confusion matrix](scores.json) · [Model revision and environment](metadata.json)
+
+## Adding one sentence about priority
+
+Both versions of the flat-number and missing-credit ticket kept the original closing sentence, “I'd like both sorted out today.” The second version appended only `Please check the missing credit first.` Both ran afresh with the same model weights and 26% cutoff.
+
+- **Original.** The expected action was clarification. The score for clarification was 17.78%, so the model went on to choose delivery. Both model responses reproduced the earlier run.
+- **Credit first.** The expected team was billing. The clarification score was 21.90%, so the model proceeded to choose a team. Billing rose from 13.46% to 19.05% and delivery fell from 74.00% to 68.82%. Delivery still won.
+
+Both final choices missed the expected action. The original ticket went wrong at the clarification step. The edited ticket went wrong at department selection. Run `python -X utf8 -m experiments.priority_pair` to reproduce this pair. [Both inputs and raw responses](priority-pair.json)

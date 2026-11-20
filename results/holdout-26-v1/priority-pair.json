@@ -1,0 +1,202 @@
+{
+  "created_at_utc": "2026-11-20T20:22:35.725995+00:00",
+  "source_id": "holdout-024",
+  "added_sentence": "Please check the missing credit first.",
+  "model_id": "vllm-sr/Decision-1.0-Kai-0.6B",
+  "model_revision": "ee45160abf994a9eca0e59495bd9b4bf08c1571a",
+  "device": "cpu",
+  "protocol_sha256": "eb215e06ee027c9a835a6f786aa7fae402b5587f472ec18e84f33996f8d3b73a",
+  "gate_order": "route-first",
+  "clarification_threshold": 0.26,
+  "threshold_comparison": ">=",
+  "cases": [
+    {
+      "variant": "both_today",
+      "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today.",
+      "expected": "needs_clarification",
+      "status": "ok",
+      "choice": "delivery",
+      "model_calls": 2,
+      "raw_calls": [
+        {
+          "stage": "gate",
+          "candidate_order": [
+            "route_to_team",
+            "needs_clarification"
+          ],
+          "request": {
+            "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today.",
+            "questions": {
+              "route": {
+                "type": "choice",
+                "instructions": "Can you assign this ticket to one of billing, technical support, or delivery? Route it if the main issue identifies one team, including when the customer says which issue to handle first. Ask for clarification if the message is too vague to identify a team or gives equal priority to independent issues for different teams.",
+                "criteria": {
+                  "route_to_team": "One team can handle the customer's main issue or stated priority.",
+                  "needs_clarification": "Ask a follow-up question only when the message is too vague to pick a team, or when issues for different teams are equally important."
+                }
+              }
+            }
+          },
+          "response": {
+            "model": "Decision-1.0-Kai-0.6B",
+            "answers": {
+              "route": {
+                "type": "choice",
+                "choice": "route_to_team",
+                "confidence": 0.6444425135850906,
+                "probabilities": {
+                  "route_to_team": 0.8222212791442871,
+                  "needs_clarification": 0.17777876555919647
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 156,
+              "output_tokens": 0
+            }
+          },
+          "status": "ok",
+          "inference_seconds": 0.23696080000081565,
+          "threshold_decision": "route_to_team"
+        },
+        {
+          "stage": "department",
+          "candidate_order": [
+            "billing",
+            "technical",
+            "delivery"
+          ],
+          "request": {
+            "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today.",
+            "questions": {
+              "route": {
+                "type": "choice",
+                "instructions": "Choose the team that best matches the customer's main issue. If the customer says which issue to handle first, use that issue.",
+                "criteria": {
+                  "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+                  "technical": "Software errors, API failures and account access problems when these are the primary request",
+                  "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request"
+                }
+              }
+            }
+          },
+          "response": {
+            "model": "Decision-1.0-Kai-0.6B",
+            "answers": {
+              "route": {
+                "type": "choice",
+                "choice": "delivery",
+                "confidence": 0.6053748726844788,
+                "probabilities": {
+                  "billing": 0.13461017608642578,
+                  "technical": 0.12540477514266968,
+                  "delivery": 0.7399850487709045
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 122,
+              "output_tokens": 0
+            }
+          },
+          "status": "ok",
+          "inference_seconds": 0.22198349999962375
+        }
+      ]
+    },
+    {
+      "variant": "credit_first",
+      "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today. Please check the missing credit first.",
+      "expected": "billing",
+      "status": "ok",
+      "choice": "delivery",
+      "model_calls": 2,
+      "raw_calls": [
+        {
+          "stage": "gate",
+          "candidate_order": [
+            "route_to_team",
+            "needs_clarification"
+          ],
+          "request": {
+            "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today. Please check the missing credit first.",
+            "questions": {
+              "route": {
+                "type": "choice",
+                "instructions": "Can you assign this ticket to one of billing, technical support, or delivery? Route it if the main issue identifies one team, including when the customer says which issue to handle first. Ask for clarification if the message is too vague to identify a team or gives equal priority to independent issues for different teams.",
+                "criteria": {
+                  "route_to_team": "One team can handle the customer's main issue or stated priority.",
+                  "needs_clarification": "Ask a follow-up question only when the message is too vague to pick a team, or when issues for different teams are equally important."
+                }
+              }
+            }
+          },
+          "response": {
+            "model": "Decision-1.0-Kai-0.6B",
+            "answers": {
+              "route": {
+                "type": "choice",
+                "choice": "route_to_team",
+                "confidence": 0.5620774328708649,
+                "probabilities": {
+                  "route_to_team": 0.7810387015342712,
+                  "needs_clarification": 0.21896126866340637
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 163,
+              "output_tokens": 0
+            }
+          },
+          "status": "ok",
+          "inference_seconds": 0.28163130000029923,
+          "threshold_decision": "route_to_team"
+        },
+        {
+          "stage": "department",
+          "candidate_order": [
+            "billing",
+            "technical",
+            "delivery"
+          ],
+          "request": {
+            "state": "The courier needs my flat number for the next delivery, and last month's credit is missing from my balance. I'd like both sorted out today. Please check the missing credit first.",
+            "questions": {
+              "route": {
+                "type": "choice",
+                "instructions": "Choose the team that best matches the customer's main issue. If the customer says which issue to handle first, use that issue.",
+                "criteria": {
+                  "billing": "Payments, duplicate charges, prices, invoices and refunds when these are the primary request",
+                  "technical": "Software errors, API failures and account access problems when these are the primary request",
+                  "delivery": "Missing parcels, damaged parcels and delivery tracking when these are the primary request"
+                }
+              }
+            }
+          },
+          "response": {
+            "model": "Decision-1.0-Kai-0.6B",
+            "answers": {
+              "route": {
+                "type": "choice",
+                "choice": "delivery",
+                "confidence": 0.49771782755851746,
+                "probabilities": {
+                  "billing": 0.19051703810691833,
+                  "technical": 0.12124805152416229,
+                  "delivery": 0.6882348656654358
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 129,
+              "output_tokens": 0
+            }
+          },
+          "status": "ok",
+          "inference_seconds": 0.25851110000076005
+        }
+      ]
+    }
+  ]
+}
