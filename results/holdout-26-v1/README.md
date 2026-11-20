@@ -38,3 +38,14 @@
 - **移到开头**后，澄清分数为 19.48%。选部门时，账单升到 21.00%，配送也升到 69.88%，最终仍选配送。
 
 对这条工单，把优先事项提前没有纠正分单。复现命令为 `python -X utf8 -m experiments.priority_pair --compare-position`。 [句子位置对照的原文与响应](priority-position.json)
+
+## 去掉补房号，只留查抵扣额
+
+沿用刚才把优先要求放在开头的版本。删掉快递需要房号的部分，把结尾的“两件事”改成“这件事”，保留“今天处理”。模型实际读到的单问题版本是：
+
+> Please check the missing credit first. Last month's credit is missing from my balance. I'd like this sorted out today.
+
+- **两个问题一起提。** 澄清分数为 19.48%，模型继续选部门，账单得分 21.00%，配送得分 69.88%，最终去了配送。两步响应均复现了上一轮的开头版。
+- **只提抵扣额。** 澄清分数升到 26.81%，超过固定的 26% 分界线。正式分单流程在第一步就选了“需要澄清”。
+
+为查明第二步会怎样处理这条单问题工单，我们把同一段英文单独交给原来的选部门步骤。它选了账单（50.59%），配送为 28.70%，技术支持为 20.70%。因此，这个样例在正式流程中被第一步拦下。两版的正式分单在复跑时给出了相同响应，全程使用原模型权重。复现命令为 `python -X utf8 -m experiments.priority_pair --compare-credit-only`。 [两版分单与单独选部门的记录](credit-only.json)

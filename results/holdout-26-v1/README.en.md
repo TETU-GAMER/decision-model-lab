@@ -38,3 +38,14 @@ Both tickets explicitly asked to check the missing credit first and should go to
 - **Sentence first.** Clarification scored 19.48%. Billing rose to 21.00%, but delivery also rose, to 69.88%, and was selected again.
 
 Moving the explicit priority to the beginning did not correct this ticket's routing. Run `python -X utf8 -m experiments.priority_pair --compare-position` to reproduce the comparison. [Inputs and raw responses by sentence position](priority-position.json)
+
+## Removing the delivery request
+
+We kept the opening priority sentence from the previous run, removed the clause about the courier needing a flat number, and changed “both” to “this” to retain the deadline. The single-issue ticket read:
+
+> Please check the missing credit first. Last month's credit is missing from my balance. I'd like this sorted out today.
+
+- **Both issues.** Clarification scored 19.48%. The model went on to choose delivery (69.88%), with billing at 21.00%. Both responses reproduced the previous run.
+- **Missing credit only.** Clarification rose to 26.81%, above the fixed 26% cutoff. The router stopped at the first step and requested clarification.
+
+To check the department decision separately, we passed the same single-issue text directly to the original department step. It chose billing (50.59%), followed by delivery (28.70%) and technical support (20.70%). For this ticket the first step prevented that billing assignment. Both routing runs reproduced their responses on replay with the original model weights. Run `python -X utf8 -m experiments.priority_pair --compare-credit-only` to reproduce the comparison. [Routing traces and separate department check](credit-only.json)
