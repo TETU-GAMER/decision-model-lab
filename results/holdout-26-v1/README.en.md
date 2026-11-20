@@ -1,0 +1,22 @@
+# How did the 26% clarification cutoff perform on new tickets?
+
+[简体中文](README.md) | English
+
+The model requested clarification on 11 of 24 new tickets. The reviewer had marked all 11 as assignable to a team. All 3 tickets that required a question went straight to a department. Overall, 8/24 decisions matched the review (33.3%).
+
+## The same cutoff on two batches
+
+- **How many required clarifications did the model catch?** It caught 5/6 (83.3%) on the development set and 0/3 (0%) on the new batch. All three missed tickets asked for two issues involving different teams to be addressed. One went to technical support and two went to delivery.
+- **How many assignable tickets got an unnecessary question?** The count rose from 3/18 (16.7%) on the development set to 11/21 (52.4%) on the new batch. The latter included all six tickets the reviewer assigned to delivery. Of the ten remaining assignable tickets, eight went to the right team and two to the wrong team.
+
+The same configuration matched 19/24 development labels. The cutoff was chosen after examining those development labels. Only three tickets in the new synthetic batch were marked as requiring clarification, which limits what this run can tell us about missed questions in real support traffic. [Development cutoff comparison](../clarification-thresholds-v1/README.en.md)
+
+## Two decisions
+
+A customer who paid with a gift card and a debit card wanted to know where a partial return would be refunded. Its clarification score of 26.09% put it just over the cutoff, triggering a question. Another customer needed to supply a flat number for a delivery and trace a missing account credit. That ticket scored 17.78%, so both requests went to delivery. [Per-ticket model responses](predictions.jsonl)
+
+## Experiment setup
+
+All 24 tickets were newly written synthetic examples. The reviewer classified them three at a time and completed the batch before inference began. The model used the original English text and the pinned weights without fine-tuning. The first step listed “route to team” first. A clarification score at or above 26% triggered a question, and only tickets below the cutoff went on to department selection. All 24 first-step calls and 13 department calls succeeded. [Frozen protocol](../../data/holdout_protocol_v1.json) · [Prompts](prompts.json)
+
+With the pinned model and a completed local review, run `python -X utf8 -m experiments.two_stage_routing --holdout` from the repository root. Different review labels can change the evaluation scores. [Scores and confusion matrix](scores.json) · [Model revision and environment](metadata.json)

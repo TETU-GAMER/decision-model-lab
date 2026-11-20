@@ -8,13 +8,14 @@ The current routing policy follows the customer's stated priority. It asks for c
 
 ## Results
 
+- **Does the 26% cutoff work on new tickets?** On 24 tickets reviewed before inference, the fixed cutoff missed all 3 required clarifications and requested clarification on 11 of 21 assignable tickets. It matched 8/24 labels, down from 19/24 on the development set. [New-ticket evaluation](results/holdout-26-v1/README.en.md)
 - **Can a score cutoff identify tickets that need a question?** On these 24 development tickets, the best cutoff that preserved all 17 correct department assignments caught only 1 of 6 required clarifications. Catching all 6 preserved at most 8 of the 17. [Clarification scores and cutoffs](results/clarification-thresholds-v1/README.en.md)
 - **Deciding whether to ask a question before choosing a team.** On the same 24 tickets, the two-stage model sent 17 of 18 assignable tickets to the right team. It also sent all six tickets that needed a follow-up straight to a team. Reversing the two options in the first step left every final decision unchanged. This version is experimental. [Two-stage routing experiment](results/two-stage-v1/README.en.md)
 - **Prompt wording.** On the same 24 tickets, the original prompt incorrectly requested clarification 18 times. Editing the instruction reduced that count to 15. Editing the candidate description alone and combining both edits each reduced it to 14. The combined prompt matched 9 labels and kept 5 of the 6 required clarifications. [Combined prompt experiment](results/prompt-combined-v1/README.en.md) | [Isolated edits](results/prompt-ablation-v1/README.md)
 - **Candidate order.** Two exploratory batches used 600 local model calls in total. Averaging four rotations reduced the number of tickets whose selected team changed from 7/12 to 1/12 in the first batch and from 6/12 to 2/12 in the second. Sorting by candidate ID gives the model a fixed order with one call per ticket. [Strategy comparison](results/strategy-comparison-v1/README.md)
 - **Development-set accuracy.** On 24 reviewed tickets, the keyword baseline matched 24/24 labels. The model matched 6/24 with the original order, 7/24 with fixed sorting, and 6/24 with four rotations. The original order and four rotations both selected needs clarification for every ticket. [Development evaluation](results/development-evaluation-v1/README.md)
 
-These results come from small, synthetic development batches. The 24 labels were supplied or confirmed by the reviewer, sometimes with AI explanations. The keyword baseline was built with access to the development examples. Independent test accuracy remains unknown.
+Both batches use synthetic tickets. The reviewer supplied or confirmed the 24 development labels, sometimes with AI explanations, and labeled the 24 new tickets before inference. The keyword baseline has been evaluated only on development examples available during its design.
 
 ## Run locally
 
