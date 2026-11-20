@@ -29,3 +29,12 @@ Both versions of the flat-number and missing-credit ticket kept the original clo
 - **Credit first.** The expected team was billing. The clarification score was 21.90%, so the model proceeded to choose a team. Billing rose from 13.46% to 19.05% and delivery fell from 74.00% to 68.82%. Delivery still won.
 
 Both final choices missed the expected action. The original ticket went wrong at the clarification step. The edited ticket went wrong at department selection. Run `python -X utf8 -m experiments.priority_pair` to reproduce this pair. [Both inputs and raw responses](priority-pair.json)
+
+## Moving the credit request to the beginning
+
+Both tickets explicitly asked to check the missing credit first and should go to billing. Only the position of the sentence `Please check the missing credit first.` changed. All other wording, punctuation, and sentence order stayed the same. Each version ran once with the same weights, prompts, candidate order, and 26% clarification cutoff.
+
+- **Sentence last.** Clarification scored 21.90%. At department selection, billing scored 19.05% and delivery scored 68.82%. The model chose delivery, reproducing both responses from the previous run.
+- **Sentence first.** Clarification scored 19.48%. Billing rose to 21.00%, but delivery also rose, to 69.88%, and was selected again.
+
+Moving the explicit priority to the beginning did not correct this ticket's routing. Run `python -X utf8 -m experiments.priority_pair --compare-position` to reproduce the comparison. [Inputs and raw responses by sentence position](priority-position.json)

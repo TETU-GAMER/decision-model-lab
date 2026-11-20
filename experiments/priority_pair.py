@@ -1,4 +1,4 @@
-"""Compare holdout-024 with the same ticket plus one explicit priority."""
+"""Compare the effect of adding or moving one priority sentence in holdout-024."""
 
 import argparse
 import json
@@ -15,6 +15,8 @@ from task_policy import fingerprint, load_policy
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--compare-position", action="store_true",
+                        help="Compare the same priority sentence at the end and at the beginning")
     args = parser.parse_args()
     queue = json.loads(HOLDOUT_QUEUE.read_text(encoding="utf-8-sig"))
     policy = load_policy(DEFAULT_POLICY)
@@ -23,10 +25,11 @@ def main():
     source_id = "holdout-024"
     original = next(case["state"] for case in queue["items"] if case["id"] == source_id)
     addition = "Please check the missing credit first."
-    cases = [
-        ("both_today", original, CLARIFY),
-        ("credit_first", original + " " + addition, "billing"),
-    ]
+    appended = original + " " + addition
+    if args.compare_position:
+        cases = [("priority_last", appended, "billing"), ("priority_first", addition + " " + original, "billing")]
+    else:
+        cases = [("both_today", original, CLARIFY), ("credit_first", appended, "billing")]
 
     started = datetime.now(timezone.utc)
     out = args.output_dir or ROOT / "outputs" / started.strftime("priority-pair-%Y%m%dT%H%M%S%fZ")
